@@ -1,8 +1,6 @@
-const axios = require('axios');
-const FormData = require('form-data');
-
 module.exports = {
     category: 'post',
+    post: true,
     path: true,
     params: ["image"],
     async run(req, res) {
