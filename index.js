@@ -14,13 +14,12 @@
     app.use('/assets', express.static(path.join(process.cwd(), 'assent')));
     app.use((req, res, next) => {
         const originalJson = res.json;
-        res.json = function (data) {
+        res.json = async function (data) {
             if (data && typeof data === 'object') {
                 const statusCode = res.statusCode || 200;
                 const fetchSet = await fetch('/assets/setting.json')
                 const { author } = await fetchSet.json()
                 const responseData = {
-                    status: true,
                     statusCode: statusCode,
                     creator: author,
                     ...data,
