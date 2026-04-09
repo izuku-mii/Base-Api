@@ -517,23 +517,27 @@ function renderResponse(data, method, path, ms, code, imgUrl, fullUrl){
     curlPre.textContent = 'curl -X GET \\\n  "'+lastUrl+'"';
   } else if(curItem && curItem.paramsFile && curItem.paramsFile.length){
     let formParts='';
-    if(curItem.paramsFile){
-      curItem.paramsFile.forEach(function(obj){
-        Object.keys(obj).forEach(function(k){ formParts+='\\\n  -F "'+k+'=@/path/to/file" '; });
-      });
-    }
-    if(curItem.paramsPost){
-      curItem.paramsPost.forEach(function(obj){
-        Object.keys(obj).forEach(function(k){ formParts+='\\\n  -F "'+k+'=value" '; });
-      });
-    }
+    // file fields
+    document.querySelectorAll('#sh-params [data-pt="file"]').forEach(function(inp){
+      const fname=inp.files&&inp.files[0]?inp.files[0].name:'file';
+      formParts+='\\\n  -F "'+inp.dataset.key+'=@'+fname+'" ';
+    });
+    // post fields alongside file
+    document.querySelectorAll('#sh-params [data-pt="post"]').forEach(function(inp){
+      formParts+='\\\n  -F "'+inp.dataset.key+'='+( inp.value||'value')+'" ';
+    });
     curlPre.textContent = 'curl -X POST \\\n  "'+lastUrl+'" '+formParts;
   } else {
+    // gather actual values from inputs
     const bodyObj={};
-    if(curItem && curItem.paramsPost){
-      curItem.paramsPost.forEach(function(obj){Object.assign(bodyObj,obj);});
-    }
-    curlPre.textContent = 'curl -X POST \\\n  "'+lastUrl+'" \\\n  -H "Content-Type: application/json" \\\n  -d \''+JSON.stringify(bodyObj,null,2)+'\'';
+    document.querySelectorAll('#sh-params [data-pt="post"]').forEach(function(inp){
+      bodyObj[inp.dataset.key]=inp.value||'';
+    });
+    curlPre.textContent =
+      'curl -X POST \\\n'+
+      '  "'+lastUrl+'" \\\n'+
+      '  -H "Content-Type: application/json" \\\n'+
+      '  -d \''+JSON.stringify(bodyObj,null,2)+'\'';
   }
 
   /* ─ fetch snippet ─ */
@@ -544,9 +548,17 @@ function renderResponse(data, method, path, ms, code, imgUrl, fullUrl){
 '  .then(r => r.json())\n'+
 '  .then(console.log);';
   } else if(curItem && curItem.paramsFile && curItem.paramsFile.length){
+    // build fd.append lines from actual keys
+    let fdLines='';
+    document.querySelectorAll('#sh-params [data-pt="file"]').forEach(function(inp){
+      fdLines+='fd.append("'+inp.dataset.key+'", file); // your file\n';
+    });
+    document.querySelectorAll('#sh-params [data-pt="post"]').forEach(function(inp){
+      fdLines+='fd.append("'+inp.dataset.key+'", "'+( inp.value||'')+'" );\n';
+    });
     fetchPre.textContent =
 'const fd = new FormData();\n'+
-'fd.append("image", file); // your file\n'+
+fdLines+
 'fetch("'+lastUrl+'", {\n'+
 '  method: "POST",\n'+
 '  body: fd\n'+
@@ -554,15 +566,16 @@ function renderResponse(data, method, path, ms, code, imgUrl, fullUrl){
 '  .then(r => r.json())\n'+
 '  .then(console.log);';
   } else {
-    const bodyObj={};
-    if(curItem && curItem.paramsPost){
-      curItem.paramsPost.forEach(function(obj){Object.assign(bodyObj,obj);});
-    }
+    // gather actual values from inputs
+    const bodyObj2={};
+    document.querySelectorAll('#sh-params [data-pt="post"]').forEach(function(inp){
+      bodyObj2[inp.dataset.key]=inp.value||'';
+    });
     fetchPre.textContent =
 'fetch("'+lastUrl+'", {\n'+
 '  method: "POST",\n'+
 '  headers: { "Content-Type": "application/json" },\n'+
-'  body: JSON.stringify('+JSON.stringify(bodyObj)+')\n'+
+'  body: JSON.stringify('+JSON.stringify(bodyObj2,null,2)+')\n'+
 '})\n'+
 '  .then(r => r.json())\n'+
 '  .then(console.log);';
@@ -686,7 +699,7 @@ function openSheet(item,idx){
   }
   if(!any){
     const d=document.createElement('div');
-    d.className='no-params';d.textContent='Tidak ada params';
+    d.className='no-params';d.textContent='no parameters';
     pc.appendChild(d);
   }
 
