@@ -384,9 +384,9 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
     <div style="height:14px"></div>
   </div>
 
-  <!-- params section -->
+  <!-- params section - diubah jadi URL -->
   <div class="s-body">
-    <div class="s-title">Params</div>
+    <div class="s-title">URL</div>
     <div id="sh-params"></div>
     <button class="btn-fetch-sh" id="sh-fetch">&#9889;&nbsp; FETCH</button>
   </div>
@@ -499,21 +499,15 @@ function switchTab(tab){
   document.getElementById('pane-body').classList.toggle('active', tab==='body');
 }
 
-/* ══ BUILD CURL */
+/* ══ BUILD CURL - tanpa paramsQuery */
 function buildCurl(item, origin){
   const isPost = item.post;
   let ep = item.path;
 
-  /* resolve GET query params from inputs */
+  /* resolve GET query params from inputs - HAPUS bagian query */
   if(!isPost){
-    document.querySelectorAll('#sh-params [data-pt="query"]').forEach(function(inp){
-      ep=ep.replace(new RegExp('('+reEsc(inp.dataset.key)+'=)[^&]*'),'$1'+encodeURIComponent(inp.value));
-    });
-    const imgP=[];
-    document.querySelectorAll('#sh-params [data-pt="imageurl"]').forEach(function(inp){
-      if(inp.value) imgP.push(encodeURIComponent(inp.dataset.key)+'='+encodeURIComponent(inp.value));
-    });
-    if(imgP.length) ep+=(ep.includes('?')?'&':'?')+imgP.join('&');
+    // HAPUS: document.querySelectorAll('#sh-params [data-pt="query"]')
+    // HAPUS: document.querySelectorAll('#sh-params [data-pt="imageurl"]')
     return 'curl -X GET "'+origin+ep+'"';
   }
 
@@ -649,7 +643,7 @@ async function copyJson(){
   }catch(e){}
 }
 
-/* ══ PARAM ROW BUILDERS */
+/* ══ PARAM ROW BUILDERS - HAPUS mkText untuk query */
 function mkText(key,dtype){
   const row=document.createElement('div'); row.className='p-row';
   const lbl=document.createElement('div'); lbl.className='p-key'; lbl.textContent=key;
@@ -710,23 +704,11 @@ function openSheet(item, idx){
       Object.keys(obj).forEach(function(k){ any=true; pc.appendChild(mkText(k,'post')); });
     });
   }
-  if(item.paramsQuery){
-    item.paramsQuery.forEach(function(obj){
-      Object.keys(obj).forEach(function(k){ any=true; pc.appendChild(mkText(k,'query')); });
-    });
-  }
-  if(!item.post && qi!==-1){
-    item.path.slice(qi+1).split('&').forEach(function(p){
-      const k=p.split('=')[0]; if(!k) return;
-      any=true; pc.appendChild(mkText(k,'query'));
-    });
-  }
-  if(!item.post && !any && /image/i.test(item.path)){
-    any=true; pc.appendChild(mkText('url','imageurl'));
-  }
+  // HAPUS bagian paramsQuery
+  
   if(!any){
     const d=document.createElement('div');
-    d.className='no-params'; d.textContent='Tidak ada params';
+    d.className='no-params'; d.textContent='Tidak ada parameter URL';
     pc.appendChild(d);
   }
 
@@ -737,7 +719,7 @@ function openSheet(item, idx){
   document.getElementById('jsonScroll').scrollTop=0;
 }
 
-/* ══ FETCH HANDLER */
+/* ══ FETCH HANDLER - HAPUS query params */
 document.getElementById('sh-fetch').addEventListener('click', async function(){
   if(!curItem) return;
   const btn=document.getElementById('sh-fetch');
@@ -755,17 +737,8 @@ document.getElementById('sh-fetch').addEventListener('click', async function(){
     let r;
     if(!curItem.post){
       let ep=curItem.path;
-      document.querySelectorAll('#sh-params [data-pt="query"]').forEach(function(inp){
-        ep=ep.replace(new RegExp('('+reEsc(inp.dataset.key)+'=)[^&]*'),'$1'+encodeURIComponent(inp.value));
-      });
-      /* imageurl params — append as query string */
-      const imgParams=[];
-      document.querySelectorAll('#sh-params [data-pt="imageurl"]').forEach(function(inp){
-        if(inp.value) imgParams.push(encodeURIComponent(inp.dataset.key)+'='+encodeURIComponent(inp.value));
-      });
-      if(imgParams.length){
-        ep+=(ep.includes('?')?'&':'?')+imgParams.join('&');
-      }
+      // HAPUS: document.querySelectorAll('#sh-params [data-pt="query"]')
+      // HAPUS: document.querySelectorAll('#sh-params [data-pt="imageurl"]')
       r=await fetch(origin+ep,{method:'GET'});
     } else if(curItem.paramsFile&&curItem.paramsFile.length){
       const fd=new FormData();
@@ -887,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function(){
     .catch(function(){});
 });
 
-/* ══ EXPOSE GLOBAL FUNCTIONS (FIX) ══ */
+/* ══ EXPOSE GLOBAL FUNCTIONS ══ */
 window.switchTab = switchTab;
 window.copyJson = copyJson;
 window.copyCurl = copyCurl;
