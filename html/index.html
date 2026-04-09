@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ══ VARIABLES — green dark */
+/* ══ VARIABLES */
 :root {
   --bg:#071510;--bg2:#0a1c16;--card:#0d2118;--card2:#102a1e;
   --fg:#c8ddd5;--fg2:#7aaa90;--fg3:#3d6650;
@@ -20,7 +20,6 @@
   --post-bg:rgba(58,143,212,0.12);--post-c:#3a8fd4;--post-b:rgba(58,143,212,0.25);
 }
 
-/* ══ RESET */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
@@ -33,14 +32,13 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
   background-image:linear-gradient(rgba(45,189,126,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(45,189,126,0.03) 1px,transparent 1px);
   background-size:48px 48px;}
 
-/* ══ ORBS */
 .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;}
 .orb-1{width:500px;height:500px;background:rgba(45,189,126,0.07);top:-100px;right:-100px;}
 .orb-2{width:400px;height:400px;background:rgba(45,189,126,0.04);bottom:20%;left:-80px;}
 
 /* ══ LOADER */
-#loader{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s,visibility .5s;gap:14px;}
-#loader.out{opacity:0;visibility:hidden;}
+#loader{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s,visibility .4s;gap:14px;}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none;}
 .loader-ring{width:36px;height:36px;border:2px solid var(--border2);border-top-color:var(--primary);border-radius:50%;animation:spin .9s linear infinite;}
 .loader-text{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);letter-spacing:3px;text-transform:uppercase;}
 
@@ -49,7 +47,8 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
-.a1{animation:fadeUp .55s .05s ease both;}.a2{animation:fadeUp .55s .12s ease both;}
+.a1{animation:fadeUp .55s .05s ease both;}
+.a2{animation:fadeUp .55s .12s ease both;}
 .a3{animation:fadeUp .55s .19s ease both;}
 
 /* ══ HEADER */
@@ -61,43 +60,16 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 .nav-row{display:flex;align-items:center;gap:6px;}
 .nav-pill{font-family:var(--ff-mono);font-size:9px;font-weight:700;color:var(--fg3);letter-spacing:1px;padding:4px 11px;border:1px solid var(--border2);border-radius:8px;background:var(--card2);}
 
-/* ══ MAIN LAYOUT — default mobile: stacked */
+/* ══ MAIN LAYOUT */
 .main-wrap{
-  max-width:1200px;
-  margin:0 auto;
-  padding:20px 20px 80px;
-  position:relative;
-  z-index:10;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+  max-width:1200px;margin:0 auto;padding:20px 20px 80px;
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;gap:20px;
 }
-
-/* ══ LEFT COLUMN — thumbnail */
-.col-left{
-  width:100%;
-  flex-shrink:0;
-}
-
-/* ══ BANNER / THUMBNAIL */
-.banner-wrap{
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid var(--border2);
-  box-shadow:0 8px 40px rgba(0,0,0,0.5);
-}
-.banner-wrap img{
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  display:block;
-}
-
-/* ══ RIGHT COLUMN — endpoints */
-.col-right{
-  flex:1;
-  min-width:0;
-}
+.col-left{width:100%;flex-shrink:0;}
+.banner-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 8px 40px rgba(0,0,0,0.5);}
+.banner-wrap img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.col-right{flex:1;min-width:0;}
 
 /* ══ CARD */
 .card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);position:relative;overflow:hidden;transition:border-color .2s;margin-bottom:8px;}
@@ -118,11 +90,9 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 }
 .ep-row:hover{border-color:rgba(45,189,126,0.35);background:var(--card2);}
 .ep-row:active{background:var(--card);}
-
 .badge{font-family:var(--ff-mono);font-size:8px;font-weight:700;letter-spacing:1px;padding:3px 9px;border-radius:6px;flex-shrink:0;text-transform:uppercase;}
-.badge-get {background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.25);}
+.badge-get{background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.25);}
 .badge-post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
-
 .ep-path{font-family:var(--ff-mono);font-size:11px;color:var(--fg2);flex:1;word-break:break-all;}
 .ep-path em{color:var(--fg3);font-style:normal;}
 .ep-arr{color:var(--fg3);font-size:11px;flex-shrink:0;}
@@ -137,29 +107,29 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
   background:var(--bg2);
   border-radius:20px 20px 0 0;
   border-top:1px solid var(--border2);
-  z-index:400;max-height:88vh;overflow-y:auto;
+  z-index:400;max-height:90vh;overflow-y:auto;
   transform:translateY(100%);
   transition:transform .34s cubic-bezier(.32,.72,0,1);
+  display:flex;flex-direction:column;
 }
 .sheet.active{transform:translateY(0);}
 .sheet::-webkit-scrollbar{width:3px;}
 .sheet::-webkit-scrollbar-thumb{background:var(--border2);}
+.sheet-handle{width:36px;height:4px;background:var(--border2);border-radius:99px;margin:12px auto 0;flex-shrink:0;}
 
-.sheet-handle{width:36px;height:4px;background:var(--border2);border-radius:99px;margin:12px auto 0;}
-
-/* sheet topbar — same structure as reference card */
-.sheet-topbar{background:var(--card);border-bottom:1px solid var(--border2);padding:0;margin-top:8px;}
+/* sheet topbar */
+.sheet-topbar{background:var(--card);border-bottom:1px solid var(--border2);padding-bottom:14px;margin-top:8px;flex-shrink:0;}
 .sheet-topbar-head{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 0;}
 .sheet-topbar-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);display:flex;align-items:center;gap:8px;}
 .sheet-ep-row{display:flex;align-items:center;gap:8px;margin:10px 18px 0;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:9px 14px;}
 .sh-method{font-family:var(--ff-mono);font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:6px;}
-.sh-method.get {background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.2);}
+.sh-method.get{background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.2);}
 .sh-method.post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
 .sh-path{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .sh-path em{color:var(--fg);font-style:normal;}
 
 /* sheet sections */
-.s-body{padding:14px 18px 18px;}
+.s-body{padding:14px 18px 18px;flex-shrink:0;}
 .s-title{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .s-title::after{content:'';flex:1;height:1px;background:var(--border2);}
 .s-divider{border:none;border-top:1px solid var(--border2);margin:0;}
@@ -167,7 +137,6 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 /* param rows */
 .p-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .p-key{font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg);min-width:70px;flex-shrink:0;text-transform:uppercase;}
-
 .input-shell{flex:1;display:flex;align-items:stretch;background:var(--bg);border:1px solid var(--border2);border-radius:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s;}
 .input-shell:focus-within{border-color:rgba(45,189,126,0.5);box-shadow:0 0 0 3px rgba(45,189,126,0.08);}
 .p-input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font-family:var(--ff-mono);font-size:11px;padding:11px 14px;min-width:0;caret-color:var(--primary);}
@@ -180,7 +149,6 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 .file-ic{font-size:13px;flex-shrink:0;color:var(--primary);}
 .file-nm{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .file-nm.picked{color:var(--fg);}
-
 .no-params{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);padding:2px 0;letter-spacing:.5px;}
 .no-params::before{content:'// ';}
 
@@ -197,36 +165,64 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 .btn-fetch-sh:active{transform:scale(.97);}
 .btn-fetch-sh:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none;}
 
-/* ══ JSON VIEWER — exact same as reference */
+/* spinner */
+.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
+
+/* ══ RESPONSE SECTION */
+.resp-section{padding:0 18px 24px;flex-shrink:0;}
+
+/* ── Tab pill (foto 3 style) ── */
+.resp-tab-wrap{display:flex;margin-bottom:14px;}
+.resp-tab-pill{
+  display:flex;border-radius:10px;overflow:hidden;
+  border:1px solid var(--border2);background:var(--bg);
+  width:100%;
+}
+.resp-tab{
+  flex:1;padding:10px 0;text-align:center;
+  font-family:var(--ff-disp);font-size:14px;letter-spacing:2px;
+  cursor:pointer;transition:background .2s,color .2s;
+  color:var(--fg3);user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.resp-tab.active{background:#111;color:#fff;}
+.resp-tab:first-child{border-radius:9px 0 0 9px;}
+.resp-tab:last-child{border-radius:0 9px 9px 0;}
+
+/* ── Tab panels ── */
+.resp-panel{display:none;}
+.resp-panel.active{display:block;}
+
+/* ── Status + Copy row ── */
+.resp-meta-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.resp-status{font-family:var(--ff-mono);font-size:10px;padding:4px 12px;border-radius:8px;font-weight:700;}
+.resp-status.ok{background:rgba(45,189,126,.1);color:var(--primary);border:1px solid rgba(45,189,126,.25);}
+.resp-status.err{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.25);}
+.resp-timing{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:3px 9px;}
+.resp-copy-btn{margin-left:auto;font-family:var(--ff-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--fg3);background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:4px 12px;cursor:pointer;transition:all .18s;}
+.resp-copy-btn:hover{color:var(--fg);border-color:var(--fg3);}
+.resp-copy-btn.copied{color:var(--primary);border-color:rgba(45,189,126,.35);}
+
+/* ── URL / curl / fetch boxes ── */
+.resp-url-box{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-family:var(--ff-mono);font-size:11px;color:var(--fg2);word-break:break-all;line-height:1.6;}
+.resp-url-box .url-label{font-size:9px;color:var(--fg3);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;}
+.resp-url-box a{color:var(--primary);text-decoration:none;}
+.resp-url-box a:hover{text-decoration:underline;}
+
+.resp-code-box{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.resp-code-label{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);letter-spacing:1px;text-transform:uppercase;padding:8px 14px 0;display:flex;align-items:center;justify-content:space-between;}
+.resp-code-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:none;border:none;cursor:pointer;padding:0;transition:color .15s;}
+.resp-code-copy:hover{color:var(--fg);}
+.resp-code-pre{padding:10px 14px 14px;font-family:var(--ff-mono);font-size:10px;color:var(--fg2);white-space:pre;overflow-x:auto;line-height:1.7;}
+.resp-code-pre::-webkit-scrollbar{height:3px;}
+.resp-code-pre::-webkit-scrollbar-thumb{background:var(--border2);}
+
+/* ── JSON viewer (body tab) ── */
 .json-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;}
 .json-card::before{content:'';display:block;height:2px;background:linear-gradient(90deg,var(--primary),rgba(45,189,126,0.2),transparent);}
-
-.json-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 0;}
+.json-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 0;}
 .json-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);display:flex;align-items:center;gap:8px;}
 .json-label-num{color:var(--primary);font-size:9px;background:rgba(45,189,126,0.1);border:1px solid rgba(45,189,126,0.2);padding:1px 7px;border-radius:6px;letter-spacing:0;}
-.json-actions{display:flex;gap:5px;}
-.json-btn{font-family:var(--ff-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--fg3);background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:4px 12px;cursor:pointer;transition:all .18s;}
-.json-btn:hover{color:var(--fg);border-color:var(--fg3);}
-.json-btn.copied{color:var(--primary);border-color:rgba(45,189,126,.35);}
-
-.json-endpoint{margin:10px 18px 0;display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:9px 14px;display:none;}
-.json-method{font-family:var(--ff-mono);font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:6px;}
-.json-method.get {background:rgba(45,189,126,.12);color:var(--primary);border:1px solid rgba(45,189,126,.2);}
-.json-method.post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
-.json-path{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.json-path em{color:var(--fg);font-style:normal;}
-.json-timing{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;white-space:nowrap;flex-shrink:0;}
-
-.json-status-row{margin:8px 18px 0;padding:9px 14px;border-radius:10px;display:flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:10px;display:none;}
-.json-status-row.ok {background:rgba(45,189,126,.06);border:1px solid rgba(45,189,126,.2);color:var(--primary);}
-.json-status-row.err{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);color:var(--red);}
-.json-status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.json-status-row.ok  .json-status-dot{background:var(--primary);box-shadow:0 0 8px var(--primary);animation:pulseDot 2s ease infinite;}
-.json-status-row.err .json-status-dot{background:var(--red);}
-.json-status-code{margin-left:auto;font-size:9px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;}
-
-.json-body{padding:10px 18px 18px;}
-.json-scroll{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;max-height:320px;overflow-y:auto;position:relative;}
+.json-scroll{background:var(--bg2);border-radius:10px;max-height:280px;overflow-y:auto;position:relative;}
 .json-scroll::-webkit-scrollbar{width:3px;}
 .json-scroll::-webkit-scrollbar-thumb{background:var(--border2);}
 .json-pre{display:flex;font-family:var(--ff-mono);font-size:11px;line-height:1.75;}
@@ -236,7 +232,8 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 .j-key{color:var(--j-key);}.j-str{color:var(--j-str);}.j-num{color:var(--j-num);}
 .j-bool{color:var(--j-bool);}.j-null{color:var(--j-null);}.j-punc{color:var(--j-punc);}
 
-.json-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:10px;text-align:center;}
+/* empty state */
+.json-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 24px;gap:10px;text-align:center;}
 .json-empty-icon{font-family:var(--ff-disp);font-size:44px;color:var(--fg3);opacity:.2;letter-spacing:2px;}
 .json-empty-text{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);line-height:1.6;}
 .json-empty-hint{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);letter-spacing:1px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:5px 14px;text-transform:uppercase;}
@@ -251,46 +248,15 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 .footer-right{text-align:right;font-family:var(--ff-mono);font-size:9px;color:var(--fg3);line-height:1.8;}
 .footer-right em{color:var(--fg2);font-style:normal;}
 
-/* spinner */
-.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
-
-/* ══ LAPTOP / DESKTOP — left-right layout */
-@media (min-width: 768px) {
-  .main-wrap{
-    flex-direction:row;
-    align-items:flex-start;
-    gap:24px;
-    padding-top:24px;
-  }
-  .col-left{
-    width:340px;
-    flex-shrink:0;
-    position:sticky;
-    top:76px;
-    align-self:flex-start;
-  }
-  .col-right{
-    flex:1;
-    min-width:0;
-  }
-  /* on desktop sheet max-width center */
-  .sheet{
-    max-width:680px;
-    left:50%;
-    right:auto;
-    transform:translateX(-50%) translateY(100%);
-    border-radius:20px 20px 0 0;
-  }
-  .sheet.active{
-    transform:translateX(-50%) translateY(0);
-  }
+/* ══ RESPONSIVE DESKTOP */
+@media (min-width:768px){
+  .main-wrap{flex-direction:row;align-items:flex-start;gap:24px;padding-top:24px;}
+  .col-left{width:340px;flex-shrink:0;position:sticky;top:76px;align-self:flex-start;}
+  .col-right{flex:1;min-width:0;}
+  .sheet{max-width:680px;left:50%;right:auto;transform:translateX(-50%) translateY(100%);border-radius:20px 20px 0 0;}
+  .sheet.active{transform:translateX(-50%) translateY(0);}
 }
-
-@media (min-width:1100px){
-  .col-left{
-    width:420px;
-  }
-}
+@media (min-width:1100px){.col-left{width:420px;}}
 </style>
 </head>
 <body>
@@ -310,31 +276,26 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
   <div class="header-inner">
     <a class="logo" href="#">
       <span class="logo-dot"></span>
-      BASE-SIMPLE
+      <span id="hdr-title">BASE-SIMPLE</span>
       <span class="logo-badge">API</span>
     </a>
     <div class="nav-row">
       <span class="nav-pill">express.js</span>
-      <span class="nav-pill">@oota_asik_sendiri</span>
+      <span class="nav-pill" id="hdr-author">@oota_asik_sendiri</span>
     </div>
   </div>
 </header>
 
-<!-- MAIN — left/right layout on desktop -->
+<!-- MAIN -->
 <div class="main-wrap">
-
-  <!-- LEFT: Thumbnail / Banner -->
   <div class="col-left a1">
     <div class="banner-wrap">
-      <img src="./assets/banner.jpg" alt="Banner"/>
+      <img src="./assets/banner.jpg" alt="Banner" onerror="this.style.display='none'"/>
     </div>
   </div>
-
-  <!-- RIGHT: Endpoints -->
   <div class="col-right">
     <div id="ep-list"></div>
   </div>
-
 </div>
 
 <!-- OVERLAY -->
@@ -344,7 +305,7 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 <div class="sheet" id="sheet">
   <div class="sheet-handle"></div>
 
-  <!-- topbar: endpoint info — ref card structure -->
+  <!-- Topbar -->
   <div class="sheet-topbar">
     <div class="sheet-topbar-head">
       <div class="sheet-topbar-label">
@@ -356,10 +317,9 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
       <span class="sh-method" id="sh-method">GET</span>
       <span class="sh-path" id="sh-path"></span>
     </div>
-    <div style="height:14px"></div>
   </div>
 
-  <!-- params section -->
+  <!-- Params -->
   <div class="s-body">
     <div class="s-title">Params</div>
     <div id="sh-params"></div>
@@ -368,44 +328,92 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 
   <hr class="s-divider"/>
 
-  <!-- json response — exact ref structure -->
-  <div class="json-card" style="margin:0;border:none;border-radius:0;background:transparent;">
-    <div class="json-header">
-      <div class="json-label">
-        <span class="json-label-num">&#60;/&#62;</span>
-        response
+  <!-- Response Section -->
+  <div class="resp-section">
+
+    <!-- Tab pill — RESPONSE | BODY -->
+    <div class="resp-tab-wrap">
+      <div class="resp-tab-pill">
+        <div class="resp-tab active" id="tab-response" onclick="switchTab('response')">RESPONSE</div>
+        <div class="resp-tab" id="tab-body" onclick="switchTab('body')">BODY</div>
       </div>
-      <div class="json-actions">
-        <button class="json-btn" id="copyBtn" onclick="copyJson()">Copy</button>
+    </div>
+
+    <!-- RESPONSE panel: URL + curl + fetch + status -->
+    <div class="resp-panel active" id="panel-response">
+      <div id="resp-empty" class="json-empty">
+        <div class="json-empty-icon">{ }</div>
+        <div class="json-empty-text">Belum ada response</div>
+        <div class="json-empty-hint">klik endpoint lalu fetch</div>
       </div>
-    </div>
-
-    <div class="json-endpoint" id="jsonEndpoint">
-      <span class="json-method" id="jsonMethod">GET</span>
-      <span class="json-path"   id="jsonPath"></span>
-      <span class="json-timing" id="jsonTiming">—ms</span>
-    </div>
-
-    <div class="json-status-row" id="jsonStatusRow">
-      <span class="json-status-dot"></span>
-      <span id="jsonStatusTxt"></span>
-      <span class="json-status-code" id="jsonStatusCode"></span>
-    </div>
-
-    <div class="json-body">
-      <div class="json-scroll" id="jsonScroll">
-        <div class="json-empty" id="jsonEmpty">
-          <div class="json-empty-icon">{ }</div>
-          <div class="json-empty-text">Belum ada response</div>
-          <div class="json-empty-hint">klik endpoint lalu fetch</div>
+      <div id="resp-content" style="display:none">
+        <!-- status + timing + copy -->
+        <div class="resp-meta-row">
+          <span class="resp-status" id="resp-status-badge">200 OK</span>
+          <span class="resp-timing" id="resp-timing">—ms</span>
+          <button class="resp-copy-btn" id="resp-copy-btn" onclick="copyResponse()">Copy</button>
         </div>
-        <div class="json-pre" id="jsonPre" style="display:none">
-          <div class="json-lines" id="jsonLines"></div>
-          <div class="json-code"  id="jsonCode"></div>
+        <!-- URL result -->
+        <div class="resp-url-box" id="resp-url-box">
+          <span class="url-label">URL</span>
+          <a id="resp-url-link" href="#" target="_blank"></a>
+        </div>
+        <!-- curl -->
+        <div class="resp-code-box">
+          <div class="resp-code-label">
+            curl
+            <button class="resp-code-copy" onclick="copyCode('resp-curl-pre')">copy</button>
+          </div>
+          <div class="resp-code-pre" id="resp-curl-pre"></div>
+        </div>
+        <!-- fetch -->
+        <div class="resp-code-box">
+          <div class="resp-code-label">
+            fetch (js)
+            <button class="resp-code-copy" onclick="copyCode('resp-fetch-pre')">copy</button>
+          </div>
+          <div class="resp-code-pre" id="resp-fetch-pre"></div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- BODY panel: JSON viewer -->
+    <div class="resp-panel" id="panel-body">
+      <div id="body-empty" class="json-empty">
+        <div class="json-empty-icon">{ }</div>
+        <div class="json-empty-text">Belum ada response</div>
+        <div class="json-empty-hint">klik endpoint lalu fetch</div>
+      </div>
+      <div id="body-content" style="display:none">
+        <div class="resp-meta-row">
+          <span class="resp-status" id="body-status-badge">200 OK</span>
+          <span class="resp-timing" id="body-timing">—ms</span>
+          <button class="resp-copy-btn" id="body-copy-btn" onclick="copyJson()">Copy JSON</button>
+        </div>
+        <div class="json-card">
+          <div class="json-header">
+            <div class="json-label">
+              <span class="json-label-num">&#60;/&#62;</span>
+              response body
+            </div>
+          </div>
+          <div style="padding:10px 14px 14px;">
+            <div class="json-scroll" id="jsonScroll">
+              <div class="json-pre" id="jsonPre">
+                <div class="json-lines" id="jsonLines"></div>
+                <div class="json-code"  id="jsonCode"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- image preview if image response -->
+        <div id="imgPreview" style="display:none;margin-top:10px;">
+          <img id="imgEl" style="max-width:100%;border-radius:10px;border:1px solid var(--border2);display:block;"/>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /resp-section -->
 
   <div style="height:24px"></div>
 </div>
@@ -425,12 +433,13 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 </footer>
 
 <script>
-/* ══ DATA */
+/* ══ STATE */
 let API = [];
+let curItem = null;
 let lastJson = null;
-let sheetIdx = 0;
+let lastUrl  = '';
 
-/* ══ HELPER */
+/* ══ HELPERS */
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 
@@ -456,41 +465,122 @@ function tokenize(v,d){
   return '<span class="j-punc">{</span>\n'+items.join('<span class="j-punc">,</span>\n')+'\n'+'  '.repeat(d)+'<span class="j-punc">}</span>';
 }
 
-/* ══ JSON VIEWER FUNCTIONS */
-function clearJson(){
-  lastJson=null;
-  document.getElementById('jsonEmpty').style.display='flex';
-  document.getElementById('jsonPre').style.display='none';
-  document.getElementById('jsonEndpoint').style.display='none';
-  document.getElementById('jsonStatusRow').style.display='none';
+/* ══ TAB SWITCH */
+function switchTab(tab){
+  document.getElementById('tab-response').classList.toggle('active', tab==='response');
+  document.getElementById('tab-body').classList.toggle('active', tab==='body');
+  document.getElementById('panel-response').classList.toggle('active', tab==='response');
+  document.getElementById('panel-body').classList.toggle('active', tab==='body');
 }
 
-function renderJson(data,method,path,ms,code,imgUrl){
-  lastJson=data;
-  document.getElementById('jsonEmpty').style.display='none';
-  document.getElementById('jsonPre').style.display='flex';
-  document.getElementById('jsonEndpoint').style.display='flex';
-  document.getElementById('jsonStatusRow').style.display='flex';
+/* ══ CLEAR RESPONSE */
+function clearResponse(){
+  lastJson=null; lastUrl='';
+  // response tab
+  document.getElementById('resp-empty').style.display='flex';
+  document.getElementById('resp-content').style.display='none';
+  // body tab
+  document.getElementById('body-empty').style.display='flex';
+  document.getElementById('body-content').style.display='none';
+  document.getElementById('imgPreview').style.display='none';
+  // reset to response tab
+  switchTab('response');
+}
 
-  const mEl=document.getElementById('jsonMethod');
-  mEl.textContent=method; mEl.className='json-method '+method.toLowerCase();
-  const qi=path.indexOf('?');
-  const pm=qi!==-1?path.slice(0,qi):path;
-  const qs=qi!==-1?path.slice(qi):'';
-  document.getElementById('jsonPath').innerHTML=esc(pm)+(qs?'<em>'+esc(qs)+'</em>':'');
-  document.getElementById('jsonTiming').textContent=ms?ms+'ms':'—ms';
+/* ══ RENDER RESPONSE */
+function renderResponse(data, method, path, ms, code, imgUrl, fullUrl){
+  lastJson = data;
+  lastUrl  = fullUrl || path;
 
-  const isOk=code>=200&&code<300&&data.status!==false;
-  const sr=document.getElementById('jsonStatusRow');
-  sr.className='json-status-row '+(isOk?'ok':'err');
-  sr.style.display='flex';
-  document.getElementById('jsonStatusTxt').textContent=isOk?code+' OK':code+' Error';
-  document.getElementById('jsonStatusCode').textContent=code;
+  const isOk = code>=200 && code<300 && data.status!==false;
+  const statusTxt = code + (isOk?' OK':' Error');
+  const statusCls = isOk?'ok':'err';
+
+  /* ─ status badges ─ */
+  ['resp-status-badge','body-status-badge'].forEach(function(id){
+    const el=document.getElementById(id);
+    el.textContent=statusTxt; el.className='resp-status '+statusCls;
+  });
+  ['resp-timing','body-timing'].forEach(function(id){
+    document.getElementById(id).textContent=ms?ms+'ms':'—ms';
+  });
+
+  /* ─ URL box ─ */
+  document.getElementById('resp-url-link').textContent = lastUrl;
+  document.getElementById('resp-url-link').href = lastUrl;
+
+  /* ─ curl snippet ─ */
+  const curlPre = document.getElementById('resp-curl-pre');
+  if(method==='GET'){
+    curlPre.textContent = 'curl -X GET \\\n  "'+lastUrl+'"';
+  } else if(curItem && curItem.paramsFile && curItem.paramsFile.length){
+    let formParts='';
+    if(curItem.paramsFile){
+      curItem.paramsFile.forEach(function(obj){
+        Object.keys(obj).forEach(function(k){ formParts+='\\\n  -F "'+k+'=@/path/to/file" '; });
+      });
+    }
+    if(curItem.paramsPost){
+      curItem.paramsPost.forEach(function(obj){
+        Object.keys(obj).forEach(function(k){ formParts+='\\\n  -F "'+k+'=value" '; });
+      });
+    }
+    curlPre.textContent = 'curl -X POST \\\n  "'+lastUrl+'" '+formParts;
+  } else {
+    const bodyObj={};
+    if(curItem && curItem.paramsPost){
+      curItem.paramsPost.forEach(function(obj){Object.assign(bodyObj,obj);});
+    }
+    curlPre.textContent = 'curl -X POST \\\n  "'+lastUrl+'" \\\n  -H "Content-Type: application/json" \\\n  -d \''+JSON.stringify(bodyObj,null,2)+'\'';
+  }
+
+  /* ─ fetch snippet ─ */
+  const fetchPre = document.getElementById('resp-fetch-pre');
+  if(method==='GET'){
+    fetchPre.textContent =
+'fetch("'+lastUrl+'")\n'+
+'  .then(r => r.json())\n'+
+'  .then(console.log);';
+  } else if(curItem && curItem.paramsFile && curItem.paramsFile.length){
+    fetchPre.textContent =
+'const fd = new FormData();\n'+
+'fd.append("image", file); // your file\n'+
+'fetch("'+lastUrl+'", {\n'+
+'  method: "POST",\n'+
+'  body: fd\n'+
+'})\n'+
+'  .then(r => r.json())\n'+
+'  .then(console.log);';
+  } else {
+    const bodyObj={};
+    if(curItem && curItem.paramsPost){
+      curItem.paramsPost.forEach(function(obj){Object.assign(bodyObj,obj);});
+    }
+    fetchPre.textContent =
+'fetch("'+lastUrl+'", {\n'+
+'  method: "POST",\n'+
+'  headers: { "Content-Type": "application/json" },\n'+
+'  body: JSON.stringify('+JSON.stringify(bodyObj)+')\n'+
+'})\n'+
+'  .then(r => r.json())\n'+
+'  .then(console.log);';
+  }
+
+  /* ─ show response panel ─ */
+  document.getElementById('resp-empty').style.display='none';
+  document.getElementById('resp-content').style.display='block';
+
+  /* ─ JSON body panel ─ */
+  document.getElementById('body-empty').style.display='none';
+  document.getElementById('body-content').style.display='block';
 
   if(imgUrl){
-    document.getElementById('jsonCode').innerHTML='<img src="'+imgUrl+'" style="max-width:100%;border-radius:8px;display:block;"/>';
-    document.getElementById('jsonLines').innerHTML='';
+    document.getElementById('imgPreview').style.display='block';
+    document.getElementById('imgEl').src=imgUrl;
+    document.getElementById('jsonPre').style.display='none';
   } else {
+    document.getElementById('imgPreview').style.display='none';
+    document.getElementById('jsonPre').style.display='flex';
     const lines=tokenize(data,0).split('\n');
     document.getElementById('jsonLines').innerHTML=
       lines.map(function(_,i){return '<span class="json-line-num">'+(i+1)+'</span>';}).join('');
@@ -499,115 +589,131 @@ function renderJson(data,method,path,ms,code,imgUrl){
   document.getElementById('jsonScroll').scrollTop=0;
 }
 
-async function copyJson(){
+/* ══ COPY HELPERS */
+async function copyResponse(){
   if(!lastJson) return;
-  const btn=document.getElementById('copyBtn');
+  const btn=document.getElementById('resp-copy-btn');
   try{
     await navigator.clipboard.writeText(JSON.stringify(lastJson,null,2));
-    btn.textContent='Copied ✓'; btn.classList.add('copied');
+    btn.textContent='Copied ✓';btn.classList.add('copied');
     setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
   }catch(e){}
 }
-
-/* ══ PARAM ROW BUILDERS */
-function mkText(key,dtype){
-  const row=document.createElement('div'); row.className='p-row';
-  const lbl=document.createElement('div'); lbl.className='p-key'; lbl.textContent=key;
-  const shell=document.createElement('div'); shell.className='input-shell';
-  const inp=document.createElement('input');
-  inp.className='p-input'; inp.placeholder='kata kata...';
-  inp.type='text'; inp.autocomplete='off';
-  inp.dataset.key=key; inp.dataset.pt=dtype;
-  shell.appendChild(inp); row.appendChild(lbl); row.appendChild(shell);
-  return row;
+async function copyJson(){
+  if(!lastJson) return;
+  const btn=document.getElementById('body-copy-btn');
+  try{
+    await navigator.clipboard.writeText(JSON.stringify(lastJson,null,2));
+    btn.textContent='Copied ✓';btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy JSON';btn.classList.remove('copied');},2000);
+  }catch(e){}
+}
+async function copyCode(preId){
+  const el=document.getElementById(preId);
+  if(!el) return;
+  try{
+    await navigator.clipboard.writeText(el.textContent);
+    const btn=el.previousElementSibling.querySelector('.resp-code-copy');
+    if(btn){btn.textContent='✓';setTimeout(function(){btn.textContent='copy';},1500);}
+  }catch(e){}
 }
 
+/* ══ PARAM BUILDERS */
+function mkText(key,dtype){
+  const row=document.createElement('div');row.className='p-row';
+  const lbl=document.createElement('div');lbl.className='p-key';lbl.textContent=key;
+  const shell=document.createElement('div');shell.className='input-shell';
+  const inp=document.createElement('input');
+  inp.className='p-input';inp.placeholder='kata kata...';
+  inp.type='text';inp.autocomplete='off';
+  inp.dataset.key=key;inp.dataset.pt=dtype;
+  shell.appendChild(inp);row.appendChild(lbl);row.appendChild(shell);
+  return row;
+}
 function mkFile(key){
-  const row=document.createElement('div'); row.className='p-row';
-  const lbl=document.createElement('div'); lbl.className='p-key'; lbl.textContent=key;
-  const shell=document.createElement('label'); shell.className='file-shell';
+  const row=document.createElement('div');row.className='p-row';
+  const lbl=document.createElement('div');lbl.className='p-key';lbl.textContent=key;
+  const shell=document.createElement('label');shell.className='file-shell';
   const fi=document.createElement('input');
-  fi.type='file'; fi.dataset.key=key; fi.dataset.pt='file';
-  const ic=document.createElement('span'); ic.className='file-ic'; ic.textContent='📎';
-  const nm=document.createElement('span'); nm.className='file-nm'; nm.textContent='Pilih media...';
+  fi.type='file';fi.dataset.key=key;fi.dataset.pt='file';
+  const ic=document.createElement('span');ic.className='file-ic';ic.textContent='📎';
+  const nm=document.createElement('span');nm.className='file-nm';nm.textContent='Pilih media...';
   fi.addEventListener('change',function(){
     if(fi.files&&fi.files[0]){nm.textContent=fi.files[0].name;nm.classList.add('picked');}
     else{nm.textContent='Pilih media...';nm.classList.remove('picked');}
   });
-  shell.appendChild(fi); shell.appendChild(ic); shell.appendChild(nm);
-  row.appendChild(lbl); row.appendChild(shell);
+  shell.appendChild(fi);shell.appendChild(ic);shell.appendChild(nm);
+  row.appendChild(lbl);row.appendChild(shell);
   return row;
 }
 
 /* ══ OPEN SHEET */
-let curItem = null;
+function openSheet(item,idx){
+  curItem=item;
+  document.getElementById('sh-num').textContent=String(idx).padStart(2,'0');
 
-function openSheet(item, idx){
-  curItem = item;
-  document.getElementById('sh-num').textContent = String(idx).padStart(2,'0');
+  const isPost=item.post;
+  const mEl=document.getElementById('sh-method');
+  mEl.textContent=isPost?'POST':'GET';
+  mEl.className='sh-method '+(isPost?'post':'get');
 
-  const isPost = item.post;
-  const mEl = document.getElementById('sh-method');
-  mEl.textContent = isPost ? 'POST' : 'GET';
-  mEl.className = 'sh-method '+(isPost?'post':'get');
+  const qi=item.path.indexOf('?');
+  const pm=qi!==-1?item.path.slice(0,qi):item.path;
+  const qs=qi!==-1?item.path.slice(qi):'';
+  document.getElementById('sh-path').innerHTML=esc(pm)+(qs?'<em>'+esc(qs)+'</em>':'');
 
-  const qi = item.path.indexOf('?');
-  const pm = qi!==-1 ? item.path.slice(0,qi) : item.path;
-  const qs = qi!==-1 ? item.path.slice(qi) : '';
-  document.getElementById('sh-path').innerHTML = esc(pm)+(qs?'<em>'+esc(qs)+'</em>':'');
-
-  const pc = document.getElementById('sh-params');
-  pc.innerHTML = '';
-  let any = false;
+  const pc=document.getElementById('sh-params');
+  pc.innerHTML='';
+  let any=false;
 
   if(item.paramsFile){
     item.paramsFile.forEach(function(obj){
-      Object.keys(obj).forEach(function(k){ any=true; pc.appendChild(mkFile(k)); });
+      Object.keys(obj).forEach(function(k){any=true;pc.appendChild(mkFile(k));});
     });
   }
   if(item.paramsPost){
     item.paramsPost.forEach(function(obj){
-      Object.keys(obj).forEach(function(k){ any=true; pc.appendChild(mkText(k,'post')); });
+      Object.keys(obj).forEach(function(k){any=true;pc.appendChild(mkText(k,'post'));});
     });
   }
-  if(!item.post && qi!==-1){
+  if(!item.post&&qi!==-1){
     item.path.slice(qi+1).split('&').forEach(function(p){
-      const k=p.split('=')[0]; if(!k) return;
-      any=true; pc.appendChild(mkText(k,'query'));
+      const k=p.split('=')[0];if(!k)return;
+      any=true;pc.appendChild(mkText(k,'query'));
     });
   }
   if(!any){
     const d=document.createElement('div');
-    d.className='no-params'; d.textContent='Tidak ada params';
+    d.className='no-params';d.textContent='Tidak ada params';
     pc.appendChild(d);
   }
 
-  clearJson();
+  clearResponse();
 
   document.getElementById('overlay').classList.add('active');
   document.getElementById('sheet').classList.add('active');
-  document.getElementById('jsonScroll').scrollTop=0;
 }
 
 /* ══ FETCH HANDLER */
 document.getElementById('sh-fetch').addEventListener('click', async function(){
-  if(!curItem) return;
+  if(!curItem)return;
   const btn=document.getElementById('sh-fetch');
   btn.disabled=true;
   btn.innerHTML='<span class="spin"></span>&nbsp;Fetching...';
-  clearJson();
+  clearResponse();
 
   const origin=(window.location.origin&&window.location.origin!=='null')?window.location.origin:'';
   const t0=Date.now();
 
   try{
-    let r;
+    let r, fullUrl;
     if(!curItem.post){
       let ep=curItem.path;
       document.querySelectorAll('#sh-params [data-pt="query"]').forEach(function(inp){
         ep=ep.replace(new RegExp('('+reEsc(inp.dataset.key)+'=)[^&]*'),'$1'+encodeURIComponent(inp.value));
       });
-      r=await fetch(origin+ep,{method:'GET'});
+      fullUrl=origin+ep;
+      r=await fetch(fullUrl,{method:'GET'});
     } else if(curItem.paramsFile&&curItem.paramsFile.length){
       const fd=new FormData();
       document.querySelectorAll('#sh-params [data-pt="file"]').forEach(function(inp){
@@ -616,32 +722,33 @@ document.getElementById('sh-fetch').addEventListener('click', async function(){
       document.querySelectorAll('#sh-params [data-pt="post"]').forEach(function(inp){
         fd.append(inp.dataset.key,inp.value);
       });
-      r=await fetch(origin+curItem.path,{method:'POST',body:fd});
+      fullUrl=origin+curItem.path;
+      r=await fetch(fullUrl,{method:'POST',body:fd});
     } else {
       const body={};
       document.querySelectorAll('#sh-params [data-pt="post"]').forEach(function(inp){
         body[inp.dataset.key]=inp.value;
       });
-      r=await fetch(origin+curItem.path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      fullUrl=origin+curItem.path;
+      r=await fetch(fullUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
     }
 
     const ms=Date.now()-t0;
     const ct=r.headers.get('content-type')||'';
-    const isPost2=curItem.post;
-    const method=isPost2?'POST':'GET';
+    const method=curItem.post?'POST':'GET';
 
     if(ct.includes('image/')){
       const blob=await r.blob();
       const url=URL.createObjectURL(blob);
-      renderJson({__image__:true,status:r.ok,code:r.status},method,curItem.path,ms,r.status,url);
+      renderResponse({__image__:true,status:r.ok,code:r.status},method,curItem.path,ms,r.status,url,fullUrl);
     } else {
       const txt=await r.text();
       let parsed=null;
       try{parsed=JSON.parse(txt);}catch(e){parsed={raw:txt};}
-      renderJson(parsed,method,curItem.path,ms,r.status,null);
+      renderResponse(parsed,method,curItem.path,ms,r.status,null,fullUrl);
     }
   } catch(e){
-    renderJson({status:false,error:e.message},'GET',curItem.path,Date.now()-t0,500,null);
+    renderResponse({status:false,error:e.message},'GET',curItem.path,Date.now()-t0,500,null,origin+(curItem?curItem.path:''));
   } finally{
     btn.disabled=false;
     btn.innerHTML='&#9889;&nbsp; FETCH';
@@ -655,77 +762,84 @@ document.getElementById('overlay').addEventListener('click',function(){
 });
 
 /* ══ RENDER ENDPOINTS FROM /endpoint */
-async function loadAndRender() {
-  try {
-    const response = await fetch('/endpoint');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    
-    // ambil endpoints (support both formats)
-    const endpointsData = data.endpoints || data;
-    API = endpointsData;
-    
-    const listEl = document.getElementById('ep-list');
-    if (!listEl) return;
-    
-    API.forEach(function(cat, ci){
-      const card = document.createElement('div');
-      card.className = 'card a'+(ci+2 <= 3 ? ci+2 : 3);
+async function loadAndRender(){
+  try{
+    const response=await fetch('/endpoint');
+    if(!response.ok) throw new Error('HTTP '+response.status);
+    const data=await response.json();
+    const endpointsData=data.endpoints||data;
+    API=endpointsData;
 
-      const num = String(ci+1).padStart(2,'0');
-      card.innerHTML =
+    const listEl=document.getElementById('ep-list');
+    if(!listEl)return;
+    listEl.innerHTML='';
+
+    API.forEach(function(cat,ci){
+      const card=document.createElement('div');
+      card.className='card a'+(ci+2<=3?ci+2:3);
+      const num=String(ci+1).padStart(2,'0');
+      card.innerHTML=
         '<div class="card-head">'+
-          '<div class="card-label"><span class="label-num">'+num+'</span> '+cat.name+'</div>'+
+          '<div class="card-label"><span class="label-num">'+num+'</span> '+esc(cat.name)+'</div>'+
         '</div>'+
         '<div class="card-body" id="cat-body-'+ci+'"></div>';
       listEl.appendChild(card);
 
-      const body = card.querySelector('#cat-body-'+ci);
+      const body=card.querySelector('#cat-body-'+ci);
       cat.items.forEach(function(item){
-        const qi = item.path.indexOf('?');
-        const pm = qi!==-1 ? item.path.slice(0,qi) : item.path;
-        const qs = qi!==-1 ? item.path.slice(qi) : '';
-
-        const row = document.createElement('div');
-        row.className = 'ep-row';
-        row.innerHTML =
+        const qi=item.path.indexOf('?');
+        const pm=qi!==-1?item.path.slice(0,qi):item.path;
+        const qs=qi!==-1?item.path.slice(qi):'';
+        const row=document.createElement('div');
+        row.className='ep-row';
+        row.innerHTML=
           '<span class="badge '+(item.post?'badge-post':'badge-get')+'">'+(item.post?'POST':'GET')+'</span>'+
           '<span class="ep-path">'+esc(pm)+(qs?'<em>'+esc(qs)+'</em>':'')+'</span>'+
           '<span class="ep-arr">›</span>';
         body.appendChild(row);
-
-        (function(it,idx){ row.addEventListener('click',function(){ openSheet(it,idx); }); })(item, ci+1);
+        (function(it,idx){row.addEventListener('click',function(){openSheet(it,idx);});})(item,ci+1);
       });
     });
-  } catch (error) {
-    console.error('Gagal load /endpoint:', error);
-    const listEl = document.getElementById('ep-list');
-    if (listEl) {
-      listEl.innerHTML = '<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)">' +
-        '<div>❌ Gagal memuat endpoint</div>' +
-        '<div style="font-size:11px;margin-top:12px;font-family:monospace">' + error.message + '</div>' +
-        '<div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div>' +
+  } catch(error){
+    console.error('Gagal load /endpoint:',error);
+    const listEl=document.getElementById('ep-list');
+    if(listEl){
+      listEl.innerHTML='<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)">'+
+        '<div>❌ Gagal memuat endpoint</div>'+
+        '<div style="font-size:11px;margin-top:12px;font-family:monospace">'+esc(error.message)+'</div>'+
+        '<div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div>'+
         '</div>';
     }
   }
 }
 
 /* ══ INIT */
-document.addEventListener('DOMContentLoaded', function(){
-  loadAndRender();
+document.addEventListener('DOMContentLoaded',function(){
+  /* Loader hilang langsung, tanpa nunggu fetch */
   setTimeout(function(){
     document.getElementById('loader').classList.add('out');
-  }, 500);
-  document.getElementById('yr').textContent = new Date().getFullYear();
+  }, 300);
 
-  /* ── load setting.json ── */
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* load setting.json untuk nama & author */
   fetch('/assets/setting.json')
-    .then(function(r){ return r.json(); })
+    .then(function(r){return r.json();})
     .then(function(s){
-      if(s.name)   document.getElementById('footer-name').textContent   = s.name;
-      if(s.author) document.getElementById('footer-author').textContent = s.author;
+      if(s.name){
+        document.getElementById('footer-name').textContent=s.name;
+        document.getElementById('hdr-title').textContent=s.name;
+        document.title=s.name+' — API';
+      }
+      if(s.author){
+        document.getElementById('footer-author').textContent=s.author;
+        document.getElementById('hdr-author').textContent=s.author;
+      }
     })
     .catch(function(){});
+
+  /* load endpoints — async, tidak block loader */
+  loadAndRender();
 });
 </script>
 </body>
