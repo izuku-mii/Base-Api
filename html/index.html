@@ -14,13 +14,10 @@
   --primary:#2dbd7e;--primary2:#1a9962;--accent:#2dbd7e;--red:#f87171;
   --border:rgba(45,189,126,0.08);--border2:rgba(45,189,126,0.16);
   --glow:0 0 40px rgba(45,189,126,0.18);--shadow:0 8px 32px rgba(0,0,0,0.5);
-  --r:12px;
+  --r:10px;
   --ff-mono:'Space Mono',monospace;--ff-disp:'Bebas Neue',sans-serif;--ff-body:'DM Sans',sans-serif;
   --j-key:#7eb3ff;--j-str:#a8e6a3;--j-num:#ffb86c;--j-bool:#f883d9;--j-null:#f87171;--j-punc:#3d6650;
   --post-bg:rgba(58,143,212,0.12);--post-c:#3a8fd4;--post-b:rgba(58,143,212,0.25);
-  
-  /* desktop shift */
-  --desktop-shift: 60px;
 }
 
 /* ══ RESET */
@@ -50,133 +47,87 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 /* ══ ANIMATIONS */
 @keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
 .a1{animation:fadeUp .55s .05s ease both;}.a2{animation:fadeUp .55s .12s ease both;}
 .a3{animation:fadeUp .55s .19s ease both;}
 
 /* ══ HEADER */
 header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-filter:blur(18px) saturate(180%);border-bottom:1px solid var(--border2);}
-.header-inner{max-width:1000px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
 .logo{font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--fg);text-decoration:none;display:flex;align-items:center;gap:10px;}
 .logo-dot{width:8px;height:8px;background:var(--primary);border-radius:50%;animation:pulseDot 2s ease infinite;}
 .logo-badge{font-size:9px;font-weight:700;background:var(--primary2);color:#fff;padding:2px 8px;letter-spacing:1px;border-radius:6px;}
 .nav-row{display:flex;align-items:center;gap:6px;}
 .nav-pill{font-family:var(--ff-mono);font-size:9px;font-weight:700;color:var(--fg3);letter-spacing:1px;padding:4px 11px;border:1px solid var(--border2);border-radius:8px;background:var(--card2);}
 
-/* ══ BANNER + DESKTOP SHIFT */
-.banner-outer{max-width:1000px;margin:24px auto 0;padding:0 24px;transition:transform 0.3s ease;}
-.main-wrap{max-width:1000px;margin:0 auto;padding:20px 24px 80px;position:relative;z-index:10;transition:transform 0.3s ease;}
-footer .footer-inner{max-width:1000px;margin:0 auto;padding:20px 24px;transition:transform 0.3s ease;}
-hr.sep{max-width:1000px;margin:0 auto;transition:transform 0.3s ease;}
-
-/* desktop: geser ke kanan */
-@media (min-width: 1280px) {
-  .banner-outer { transform: translateX(var(--desktop-shift)); }
-  .main-wrap { transform: translateX(var(--desktop-shift)); }
-  header .header-inner { transform: translateX(var(--desktop-shift)); }
-  hr.sep { transform: translateX(var(--desktop-shift)); }
-  footer .footer-inner { transform: translateX(var(--desktop-shift)); }
-}
-
-.banner-wrap{border-radius:20px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 8px 40px rgba(0,0,0,0.5);}
-.banner-wrap img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
-
-/* ══ THUMBNAIL / ENDPOINT CARD - satu per satu */
-.endpoint-grid{display:flex;flex-direction:column;gap:12px;}
-
-.ep-thumb{
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:16px 20px;
-  cursor:pointer;
-  transition:all 0.2s ease;
+/* ══ MAIN LAYOUT — default mobile: stacked */
+.main-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 20px 80px;
+  position:relative;
+  z-index:10;
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
+  flex-direction:column;
+  gap:20px;
 }
 
-.ep-thumb:hover{
-  border-color:var(--primary);
-  background:var(--card2);
-  transform:translateX(4px);
-}
-
-.ep-thumb-left{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  flex:1;
-}
-
-.ep-method{
-  font-family:var(--ff-mono);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:1px;
-  padding:4px 12px;
-  border-radius:8px;
-  text-transform:uppercase;
+/* ══ LEFT COLUMN — thumbnail */
+.col-left{
+  width:100%;
   flex-shrink:0;
 }
-.method-get{background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.25);}
-.method-post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
 
-.ep-info{
+/* ══ BANNER / THUMBNAIL */
+.banner-wrap{
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border2);
+  box-shadow:0 8px 40px rgba(0,0,0,0.5);
+  position:sticky;
+  top:76px; /* header height + gap */
+}
+.banner-wrap img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  display:block;
+}
+
+/* ══ RIGHT COLUMN — endpoints */
+.col-right{
   flex:1;
   min-width:0;
 }
 
-.ep-path{
-  font-family:var(--ff-mono);
-  font-size:13px;
-  font-weight:500;
-  color:var(--fg);
-  word-break:break-all;
-}
+/* ══ CARD */
+.card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);position:relative;overflow:hidden;transition:border-color .2s;margin-bottom:8px;}
+.card:hover{border-color:rgba(45,189,126,0.3);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary),rgba(45,189,126,0.2),transparent);}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;}
+.card-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);display:flex;align-items:center;gap:8px;}
+.label-num{color:var(--primary);font-size:9px;background:rgba(45,189,126,0.1);border:1px solid rgba(45,189,126,0.2);padding:1px 7px;border-radius:6px;letter-spacing:0;}
+.card-body{padding:14px 18px 18px;}
 
-.ep-path em{
-  color:var(--fg3);
-  font-style:normal;
-  font-size:12px;
+/* ══ ENDPOINT ROW */
+.ep-row{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:10px;padding:11px 14px;margin-bottom:6px;
+  cursor:pointer;transition:border-color .18s,background .18s;
+  -webkit-tap-highlight-color:transparent;user-select:none;
 }
+.ep-row:hover{border-color:rgba(45,189,126,0.35);background:var(--card2);}
+.ep-row:active{background:var(--card);}
 
-.ep-desc{
-  font-size:11px;
-  color:var(--fg3);
-  margin-top:4px;
-  letter-spacing:0.3px;
-}
+.badge{font-family:var(--ff-mono);font-size:8px;font-weight:700;letter-spacing:1px;padding:3px 9px;border-radius:6px;flex-shrink:0;text-transform:uppercase;}
+.badge-get {background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.25);}
+.badge-post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
 
-.ep-thumb-right{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-shrink:0;
-}
-
-.ep-badge{
-  font-family:var(--ff-mono);
-  font-size:8px;
-  padding:3px 8px;
-  background:var(--bg2);
-  border:1px solid var(--border2);
-  border-radius:6px;
-  color:var(--fg2);
-}
-
-.ep-arrow{
-  color:var(--primary);
-  font-size:18px;
-  font-weight:700;
-  opacity:0.6;
-  transition:opacity 0.2s;
-}
-.ep-thumb:hover .ep-arrow{
-  opacity:1;
-  transform:translateX(3px);
-}
+.ep-path{font-family:var(--ff-mono);font-size:11px;color:var(--fg2);flex:1;word-break:break-all;}
+.ep-path em{color:var(--fg3);font-style:normal;}
+.ep-arr{color:var(--fg3);font-size:11px;flex-shrink:0;}
 
 /* ══ OVERLAY */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:300;opacity:0;pointer-events:none;transition:opacity .25s ease;backdrop-filter:blur(4px);}
@@ -186,7 +137,7 @@ hr.sep{max-width:1000px;margin:0 auto;transition:transform 0.3s ease;}
 .sheet{
   position:fixed;bottom:0;left:0;right:0;
   background:var(--bg2);
-  border-radius:24px 24px 0 0;
+  border-radius:20px 20px 0 0;
   border-top:1px solid var(--border2);
   z-index:400;max-height:88vh;overflow-y:auto;
   transform:translateY(100%);
@@ -196,31 +147,35 @@ hr.sep{max-width:1000px;margin:0 auto;transition:transform 0.3s ease;}
 .sheet::-webkit-scrollbar{width:3px;}
 .sheet::-webkit-scrollbar-thumb{background:var(--border2);}
 
-.sheet-handle{width:40px;height:4px;background:var(--border2);border-radius:99px;margin:14px auto 0;}
+.sheet-handle{width:36px;height:4px;background:var(--border2);border-radius:99px;margin:12px auto 0;}
 
+/* sheet topbar — same structure as reference card */
 .sheet-topbar{background:var(--card);border-bottom:1px solid var(--border2);padding:0;margin-top:8px;}
-.sheet-topbar-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 0;}
+.sheet-topbar-head{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 0;}
 .sheet-topbar-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);display:flex;align-items:center;gap:8px;}
-.sheet-ep-row{display:flex;align-items:center;gap:10px;margin:12px 20px 0;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:12px 16px;}
-.sh-method{font-family:var(--ff-mono);font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:8px;}
+.sheet-ep-row{display:flex;align-items:center;gap:8px;margin:10px 18px 0;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:9px 14px;}
+.sh-method{font-family:var(--ff-mono);font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:6px;}
 .sh-method.get {background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.2);}
 .sh-method.post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
-.sh-path{font-family:var(--ff-mono);font-size:11px;color:var(--fg3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sh-path{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .sh-path em{color:var(--fg);font-style:normal;}
 
-.s-body{padding:16px 20px 20px;}
+/* sheet sections */
+.s-body{padding:14px 18px 18px;}
 .s-title{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .s-title::after{content:'';flex:1;height:1px;background:var(--border2);}
 .s-divider{border:none;border-top:1px solid var(--border2);margin:0;}
 
-.p-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.p-key{font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg);min-width:80px;flex-shrink:0;text-transform:uppercase;}
+/* param rows */
+.p-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.p-key{font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg);min-width:70px;flex-shrink:0;text-transform:uppercase;}
 
 .input-shell{flex:1;display:flex;align-items:stretch;background:var(--bg);border:1px solid var(--border2);border-radius:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s;}
 .input-shell:focus-within{border-color:rgba(45,189,126,0.5);box-shadow:0 0 0 3px rgba(45,189,126,0.08);}
 .p-input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font-family:var(--ff-mono);font-size:11px;padding:11px 14px;min-width:0;caret-color:var(--primary);}
 .p-input::placeholder{color:var(--fg3);}
 
+/* file input */
 .file-shell{flex:1;display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .2s;position:relative;}
 .file-shell:hover{border-color:rgba(45,189,126,0.4);}
 .file-shell input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
@@ -228,69 +183,113 @@ hr.sep{max-width:1000px;margin:0 auto;transition:transform 0.3s ease;}
 .file-nm{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .file-nm.picked{color:var(--fg);}
 
-.no-params{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);padding:6px 0;}
+.no-params{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);padding:2px 0;letter-spacing:.5px;}
 .no-params::before{content:'// ';}
 
+/* fetch button */
 .btn-fetch-sh{
-  width:100%;padding:14px;border:none;border-radius:12px;
+  width:100%;padding:13px;border:none;border-radius:10px;
   background:var(--primary);color:#fff;
   font-family:var(--ff-mono);font-weight:700;font-size:10px;
   letter-spacing:1px;text-transform:uppercase;cursor:pointer;
   transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:20px;
+  margin-top:16px;
 }
 .btn-fetch-sh:hover{background:var(--primary2);box-shadow:var(--glow);}
 .btn-fetch-sh:active{transform:scale(.97);}
 .btn-fetch-sh:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none;}
 
-/* JSON VIEWER */
-.json-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;margin:0;}
-.json-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 0;}
+/* ══ JSON VIEWER — exact same as reference */
+.json-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;}
+.json-card::before{content:'';display:block;height:2px;background:linear-gradient(90deg,var(--primary),rgba(45,189,126,0.2),transparent);}
+
+.json-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 0;}
 .json-label{font-family:var(--ff-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--fg3);display:flex;align-items:center;gap:8px;}
-.json-label-num{color:var(--primary);font-size:9px;background:rgba(45,189,126,0.1);border:1px solid rgba(45,189,126,0.2);padding:1px 7px;border-radius:6px;}
+.json-label-num{color:var(--primary);font-size:9px;background:rgba(45,189,126,0.1);border:1px solid rgba(45,189,126,0.2);padding:1px 7px;border-radius:6px;letter-spacing:0;}
 .json-actions{display:flex;gap:5px;}
 .json-btn{font-family:var(--ff-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--fg3);background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:4px 12px;cursor:pointer;transition:all .18s;}
 .json-btn:hover{color:var(--fg);border-color:var(--fg3);}
 .json-btn.copied{color:var(--primary);border-color:rgba(45,189,126,.35);}
 
-.json-endpoint{margin:12px 20px 0;display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:9px 14px;display:none;}
+.json-endpoint{margin:10px 18px 0;display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:9px 14px;display:none;}
 .json-method{font-family:var(--ff-mono);font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:6px;}
 .json-method.get {background:rgba(45,189,126,.12);color:var(--primary);border:1px solid rgba(45,189,126,.2);}
 .json-method.post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
 .json-path{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.json-path em{color:var(--fg);font-style:normal;}
 .json-timing{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;white-space:nowrap;flex-shrink:0;}
 
-.json-status-row{margin:8px 20px 0;padding:9px 14px;border-radius:10px;display:flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:10px;display:none;}
+.json-status-row{margin:8px 18px 0;padding:9px 14px;border-radius:10px;display:flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:10px;display:none;}
 .json-status-row.ok {background:rgba(45,189,126,.06);border:1px solid rgba(45,189,126,.2);color:var(--primary);}
 .json-status-row.err{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);color:var(--red);}
 .json-status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.json-status-row.ok .json-status-dot{background:var(--primary);box-shadow:0 0 8px var(--primary);animation:pulseDot 2s ease infinite;}
+.json-status-row.ok  .json-status-dot{background:var(--primary);box-shadow:0 0 8px var(--primary);animation:pulseDot 2s ease infinite;}
+.json-status-row.err .json-status-dot{background:var(--red);}
 .json-status-code{margin-left:auto;font-size:9px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:2px 8px;}
 
-.json-body{padding:12px 20px 20px;}
-.json-scroll{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;max-height:320px;overflow-y:auto;}
+.json-body{padding:10px 18px 18px;}
+.json-scroll{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;max-height:320px;overflow-y:auto;position:relative;}
+.json-scroll::-webkit-scrollbar{width:3px;}
+.json-scroll::-webkit-scrollbar-thumb{background:var(--border2);}
 .json-pre{display:flex;font-family:var(--ff-mono);font-size:11px;line-height:1.75;}
-.json-lines{flex-shrink:0;width:36px;padding:14px 0;text-align:right;border-right:1px solid var(--border2);user-select:none;position:sticky;left:0;background:rgba(7,21,16,.92);}
+.json-lines{flex-shrink:0;width:36px;padding:14px 0;text-align:right;border-right:1px solid var(--border2);user-select:none;position:sticky;left:0;background:rgba(7,21,16,.92);backdrop-filter:blur(4px);}
 .json-line-num{display:block;font-size:9px;color:var(--fg3);padding-right:8px;line-height:1.75;}
 .json-code{flex:1;padding:14px 16px;white-space:pre;overflow-x:auto;}
 .j-key{color:var(--j-key);}.j-str{color:var(--j-str);}.j-num{color:var(--j-num);}
 .j-bool{color:var(--j-bool);}.j-null{color:var(--j-null);}.j-punc{color:var(--j-punc);}
 
 .json-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:10px;text-align:center;}
-.json-empty-icon{font-family:var(--ff-disp);font-size:44px;color:var(--fg3);opacity:.2;}
-.json-empty-text{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);}
-.json-empty-hint{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);letter-spacing:1px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:5px 14px;}
+.json-empty-icon{font-family:var(--ff-disp);font-size:44px;color:var(--fg3);opacity:.2;letter-spacing:2px;}
+.json-empty-text{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);line-height:1.6;}
+.json-empty-hint{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);letter-spacing:1px;background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:5px 14px;text-transform:uppercase;}
+.json-empty-hint::before{content:'$ ';color:var(--primary);}
 
+/* ══ FOOTER */
+hr.sep{border:none;border-top:1px solid var(--border2);max-width:1200px;margin:0 auto;}
+footer{background:var(--card);border-top:1px solid var(--border2);position:relative;z-index:10;}
+.footer-inner{max-width:1200px;margin:0 auto;padding:20px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.footer-brand{font-family:var(--ff-disp);font-size:20px;color:var(--fg);letter-spacing:2px;}
+.footer-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);letter-spacing:.5px;margin-top:2px;}
+.footer-right{text-align:right;font-family:var(--ff-mono);font-size:9px;color:var(--fg3);line-height:1.8;}
+.footer-right em{color:var(--fg2);font-style:normal;}
+
+/* spinner */
 .spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;}
 
-/* FOOTER */
-hr.sep{border:none;border-top:1px solid var(--border2);}
-footer{background:var(--card);border-top:1px solid var(--border2);position:relative;z-index:10;}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.footer-brand{font-family:var(--ff-disp);font-size:20px;color:var(--fg);letter-spacing:2px;}
-.footer-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);margin-top:2px;}
-.footer-right{text-align:right;font-family:var(--ff-mono);font-size:9px;color:var(--fg3);}
-.footer-right em{color:var(--fg2);font-style:normal;}
+/* ══ LAPTOP / DESKTOP — left-right layout */
+@media (min-width: 768px) {
+  .main-wrap{
+    flex-direction:row;
+    align-items:flex-start;
+    gap:24px;
+    padding-top:24px;
+  }
+  .col-left{
+    width:340px;
+    flex-shrink:0;
+  }
+  .col-right{
+    flex:1;
+    min-width:0;
+  }
+  /* on desktop sheet max-width center */
+  .sheet{
+    max-width:680px;
+    left:50%;
+    right:auto;
+    transform:translateX(-50%) translateY(100%);
+    border-radius:20px 20px 0 0;
+  }
+  .sheet.active{
+    transform:translateX(-50%) translateY(0);
+  }
+}
+
+@media (min-width:1100px){
+  .col-left{
+    width:420px;
+  }
+}
 </style>
 </head>
 <body>
@@ -299,11 +298,13 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 
+<!-- LOADER -->
 <div id="loader">
   <div class="loader-ring"></div>
   <div class="loader-text">loading</div>
 </div>
 
+<!-- HEADER -->
 <header>
   <div class="header-inner">
     <a class="logo" href="#">
@@ -318,20 +319,31 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
   </div>
 </header>
 
-<div class="banner-outer a1">
-  <div class="banner-wrap">
-    <img src="./assets/banner.jpg" alt="Banner"/>
-  </div>
-</div>
-
+<!-- MAIN — left/right layout on desktop -->
 <div class="main-wrap">
-  <div id="ep-list"></div>
+
+  <!-- LEFT: Thumbnail / Banner -->
+  <div class="col-left a1">
+    <div class="banner-wrap">
+      <img src="./assets/banner.jpg" alt="Banner"/>
+    </div>
+  </div>
+
+  <!-- RIGHT: Endpoints -->
+  <div class="col-right">
+    <div id="ep-list"></div>
+  </div>
+
 </div>
 
+<!-- OVERLAY -->
 <div class="overlay" id="overlay"></div>
 
+<!-- BOTTOM SHEET -->
 <div class="sheet" id="sheet">
   <div class="sheet-handle"></div>
+
+  <!-- topbar: endpoint info — ref card structure -->
   <div class="sheet-topbar">
     <div class="sheet-topbar-head">
       <div class="sheet-topbar-label">
@@ -346,18 +358,20 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
     <div style="height:14px"></div>
   </div>
 
+  <!-- params section -->
   <div class="s-body">
     <div class="s-title">Params</div>
     <div id="sh-params"></div>
-    <button class="btn-fetch-sh" id="sh-fetch">⚡ FETCH</button>
+    <button class="btn-fetch-sh" id="sh-fetch">&#9889;&nbsp; FETCH</button>
   </div>
 
   <hr class="s-divider"/>
 
+  <!-- json response — exact ref structure -->
   <div class="json-card" style="margin:0;border:none;border-radius:0;background:transparent;">
     <div class="json-header">
       <div class="json-label">
-        <span class="json-label-num">&lt;/&gt;</span>
+        <span class="json-label-num">&#60;/&#62;</span>
         response
       </div>
       <div class="json-actions">
@@ -367,7 +381,7 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 
     <div class="json-endpoint" id="jsonEndpoint">
       <span class="json-method" id="jsonMethod">GET</span>
-      <span class="json-path" id="jsonPath"></span>
+      <span class="json-path"   id="jsonPath"></span>
       <span class="json-timing" id="jsonTiming">—ms</span>
     </div>
 
@@ -386,11 +400,12 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
         </div>
         <div class="json-pre" id="jsonPre" style="display:none">
           <div class="json-lines" id="jsonLines"></div>
-          <div class="json-code" id="jsonCode"></div>
+          <div class="json-code"  id="jsonCode"></div>
         </div>
       </div>
     </div>
   </div>
+
   <div style="height:24px"></div>
 </div>
 
@@ -408,19 +423,22 @@ footer{background:var(--card);border-top:1px solid var(--border2);position:relat
 </footer>
 
 <script>
+/* ══ DATA */
 let API = [];
 let lastJson = null;
-let curItem = null;
+let sheetIdx = 0;
 
+/* ══ HELPER */
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 
+/* ══ TOKENIZER */
 function tokenize(v,d){
   d=d||0;
-  if(v===null) return '<span class="j-null">null</span>';
+  if(v===null)             return '<span class="j-null">null</span>';
   if(typeof v==='boolean') return '<span class="j-bool">'+v+'</span>';
-  if(typeof v==='number') return '<span class="j-num">'+v+'</span>';
-  if(typeof v==='string') return '<span class="j-str">"'+esc(v)+'"</span>';
+  if(typeof v==='number')  return '<span class="j-num">'+v+'</span>';
+  if(typeof v==='string')  return '<span class="j-str">"'+esc(v)+'"</span>';
   if(Array.isArray(v)){
     if(!v.length) return '<span class="j-punc">[]</span>';
     const ind='  '.repeat(d+1);
@@ -436,6 +454,7 @@ function tokenize(v,d){
   return '<span class="j-punc">{</span>\n'+items.join('<span class="j-punc">,</span>\n')+'\n'+'  '.repeat(d)+'<span class="j-punc">}</span>';
 }
 
+/* ══ JSON VIEWER FUNCTIONS */
 function clearJson(){
   lastJson=null;
   document.getElementById('jsonEmpty').style.display='flex';
@@ -459,7 +478,7 @@ function renderJson(data,method,path,ms,code,imgUrl){
   document.getElementById('jsonPath').innerHTML=esc(pm)+(qs?'<em>'+esc(qs)+'</em>':'');
   document.getElementById('jsonTiming').textContent=ms?ms+'ms':'—ms';
 
-  const isOk=code>=200&&code<300;
+  const isOk=code>=200&&code<300&&data.status!==false;
   const sr=document.getElementById('jsonStatusRow');
   sr.className='json-status-row '+(isOk?'ok':'err');
   sr.style.display='flex';
@@ -467,11 +486,12 @@ function renderJson(data,method,path,ms,code,imgUrl){
   document.getElementById('jsonStatusCode').textContent=code;
 
   if(imgUrl){
-    document.getElementById('jsonCode').innerHTML='<img src="'+imgUrl+'" style="max-width:100%;border-radius:8px;"/>';
+    document.getElementById('jsonCode').innerHTML='<img src="'+imgUrl+'" style="max-width:100%;border-radius:8px;display:block;"/>';
     document.getElementById('jsonLines').innerHTML='';
   } else {
     const lines=tokenize(data,0).split('\n');
-    document.getElementById('jsonLines').innerHTML=lines.map(function(_,i){return '<span class="json-line-num">'+(i+1)+'</span>';}).join('');
+    document.getElementById('jsonLines').innerHTML=
+      lines.map(function(_,i){return '<span class="json-line-num">'+(i+1)+'</span>';}).join('');
     document.getElementById('jsonCode').innerHTML=lines.join('\n');
   }
   document.getElementById('jsonScroll').scrollTop=0;
@@ -487,12 +507,13 @@ async function copyJson(){
   }catch(e){}
 }
 
+/* ══ PARAM ROW BUILDERS */
 function mkText(key,dtype){
   const row=document.createElement('div'); row.className='p-row';
   const lbl=document.createElement('div'); lbl.className='p-key'; lbl.textContent=key;
   const shell=document.createElement('div'); shell.className='input-shell';
   const inp=document.createElement('input');
-  inp.className='p-input'; inp.placeholder='value...';
+  inp.className='p-input'; inp.placeholder='kata kata...';
   inp.type='text'; inp.autocomplete='off';
   inp.dataset.key=key; inp.dataset.pt=dtype;
   shell.appendChild(inp); row.appendChild(lbl); row.appendChild(shell);
@@ -506,15 +527,18 @@ function mkFile(key){
   const fi=document.createElement('input');
   fi.type='file'; fi.dataset.key=key; fi.dataset.pt='file';
   const ic=document.createElement('span'); ic.className='file-ic'; ic.textContent='📎';
-  const nm=document.createElement('span'); nm.className='file-nm'; nm.textContent='Pilih file...';
+  const nm=document.createElement('span'); nm.className='file-nm'; nm.textContent='Pilih media...';
   fi.addEventListener('change',function(){
     if(fi.files&&fi.files[0]){nm.textContent=fi.files[0].name;nm.classList.add('picked');}
-    else{nm.textContent='Pilih file...';nm.classList.remove('picked');}
+    else{nm.textContent='Pilih media...';nm.classList.remove('picked');}
   });
   shell.appendChild(fi); shell.appendChild(ic); shell.appendChild(nm);
   row.appendChild(lbl); row.appendChild(shell);
   return row;
 }
+
+/* ══ OPEN SHEET */
+let curItem = null;
 
 function openSheet(item, idx){
   curItem = item;
@@ -557,16 +581,18 @@ function openSheet(item, idx){
   }
 
   clearJson();
+
   document.getElementById('overlay').classList.add('active');
   document.getElementById('sheet').classList.add('active');
   document.getElementById('jsonScroll').scrollTop=0;
 }
 
+/* ══ FETCH HANDLER */
 document.getElementById('sh-fetch').addEventListener('click', async function(){
   if(!curItem) return;
   const btn=document.getElementById('sh-fetch');
   btn.disabled=true;
-  btn.innerHTML='<span class="spin"></span> FETCHING...';
+  btn.innerHTML='<span class="spin"></span>&nbsp;Fetching...';
   clearJson();
 
   const origin=(window.location.origin&&window.location.origin!=='null')?window.location.origin:'';
@@ -599,12 +625,13 @@ document.getElementById('sh-fetch').addEventListener('click', async function(){
 
     const ms=Date.now()-t0;
     const ct=r.headers.get('content-type')||'';
-    const method=curItem.post?'POST':'GET';
+    const isPost2=curItem.post;
+    const method=isPost2?'POST':'GET';
 
     if(ct.includes('image/')){
       const blob=await r.blob();
       const url=URL.createObjectURL(blob);
-      renderJson({image:true,status:r.ok},method,curItem.path,ms,r.status,url);
+      renderJson({__image__:true,status:r.ok,code:r.status},method,curItem.path,ms,r.status,url);
     } else {
       const txt=await r.text();
       let parsed=null;
@@ -615,54 +642,57 @@ document.getElementById('sh-fetch').addEventListener('click', async function(){
     renderJson({status:false,error:e.message},'GET',curItem.path,Date.now()-t0,500,null);
   } finally{
     btn.disabled=false;
-    btn.innerHTML='⚡ FETCH';
+    btn.innerHTML='&#9889;&nbsp; FETCH';
   }
 });
 
+/* ══ CLOSE SHEET */
 document.getElementById('overlay').addEventListener('click',function(){
   document.getElementById('overlay').classList.remove('active');
   document.getElementById('sheet').classList.remove('active');
 });
 
+/* ══ RENDER ENDPOINTS FROM /endpoint */
 async function loadAndRender() {
   try {
     const response = await fetch('/endpoint');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
+    
+    // ambil endpoints (support both formats)
     const endpointsData = data.endpoints || data;
     API = endpointsData;
     
     const listEl = document.getElementById('ep-list');
     if (!listEl) return;
     
-    listEl.innerHTML = '<div class="endpoint-grid"></div>';
-    const grid = listEl.querySelector('.endpoint-grid');
-    let idx = 1;
-    
-    API.forEach(function(cat){
+    API.forEach(function(cat, ci){
+      const card = document.createElement('div');
+      card.className = 'card a'+(ci+2 <= 3 ? ci+2 : 3);
+
+      const num = String(ci+1).padStart(2,'0');
+      card.innerHTML =
+        '<div class="card-head">'+
+          '<div class="card-label"><span class="label-num">'+num+'</span> '+cat.name+'</div>'+
+        '</div>'+
+        '<div class="card-body" id="cat-body-'+ci+'"></div>';
+      listEl.appendChild(card);
+
+      const body = card.querySelector('#cat-body-'+ci);
       cat.items.forEach(function(item){
         const qi = item.path.indexOf('?');
         const pm = qi!==-1 ? item.path.slice(0,qi) : item.path;
         const qs = qi!==-1 ? item.path.slice(qi) : '';
-        
-        const thumb = document.createElement('div');
-        thumb.className = 'ep-thumb a'+(idx%3+1);
-        thumb.innerHTML = `
-          <div class="ep-thumb-left">
-            <span class="ep-method ${item.post ? 'method-post' : 'method-get'}">${item.post ? 'POST' : 'GET'}</span>
-            <div class="ep-info">
-              <div class="ep-path">${esc(pm)}${qs ? '<em>'+esc(qs)+'</em>' : ''}</div>
-              <div class="ep-desc">${cat.name}</div>
-            </div>
-          </div>
-          <div class="ep-thumb-right">
-            <span class="ep-badge">endpoint</span>
-            <span class="ep-arrow">→</span>
-          </div>
-        `;
-        thumb.addEventListener('click', (function(it, i){ return function(){ openSheet(it, i); }; })(item, idx));
-        grid.appendChild(thumb);
-        idx++;
+
+        const row = document.createElement('div');
+        row.className = 'ep-row';
+        row.innerHTML =
+          '<span class="badge '+(item.post?'badge-post':'badge-get')+'">'+(item.post?'POST':'GET')+'</span>'+
+          '<span class="ep-path">'+esc(pm)+(qs?'<em>'+esc(qs)+'</em>':'')+'</span>'+
+          '<span class="ep-arr">›</span>';
+        body.appendChild(row);
+
+        (function(it,idx){ row.addEventListener('click',function(){ openSheet(it,idx); }); })(item, ci+1);
       });
     });
   } catch (error) {
@@ -672,11 +702,13 @@ async function loadAndRender() {
       listEl.innerHTML = '<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)">' +
         '<div>❌ Gagal memuat endpoint</div>' +
         '<div style="font-size:11px;margin-top:12px;font-family:monospace">' + error.message + '</div>' +
+        '<div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div>' +
         '</div>';
     }
   }
 }
 
+/* ══ INIT */
 document.addEventListener('DOMContentLoaded', function(){
   loadAndRender();
   setTimeout(function(){
