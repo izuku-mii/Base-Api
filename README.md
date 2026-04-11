@@ -47,8 +47,8 @@ simplified-api/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rynxzyy/simplified-api.git
-   cd simplified-api
+   git clone https://github.com/izuku-mii/Base-Api.git
+   cd Base-Apu
    ```
 
 2. Install dependencies:
@@ -77,6 +77,10 @@ To add a new endpoint, simply create a new JavaScript file in the `api` director
        category: 'Weather',
        // Optional params array
        params: ['city'],
+       // path: true,
+       // post: true,
+       // paramsPost: [], // {}
+       // paramsFile: [],
        async run(req, res) {
            try {
                const { city } = req.query;
