@@ -1,4 +1,4 @@
-# Simplified API
+# Simple Base!!
 
 A minimalist, plugin-based REST API implementation with zero UI dependencies. Simplified API delivers pure JSON responses through an intuitive plugin architecture.
 
@@ -44,61 +44,8 @@ simplified-api/
        └── hydromind.js -> /ai/hydromind
    ```
 
-2. **Plugin Structure**:
-   Each plugin file must export an object with the following structure:
-
-   ```javascript
-   module.exports = {
-        // Category for documentation purposes
-        category: 'String',
-        
-        // Optional: List of parameters (can be omitted)
-        params: ['param1', 'param2'],
-        
-        // The main function that handles the request
-        async run(req, res) {
-            // Your code here
-            res.status(200).json({ result: 'Success' });
-        }
-   }
-   ```
-
-## Example: AI Integration Plugin
-
-Here's an example of a plugin file that integrates with an AI service:
-
-```javascript
-const axios = require('axios');
-const FormData = require('form-data');
-
-module.exports = {
-    category: 'AI',
-    // The params array is optional but helpful for documentation
-    params: ['text', 'model'],
-    async run(req, res) {
-        try {
-            const { text, model } = req.query;
-            if (!text || !model) return res.status(400).json({ error: 'Text and Model is required' });
-            
-            const form = new FormData();
-            form.append('content', text);
-            form.append('model', model);
-            const { data } = await axios.post('https://mind.hydrooo.web.id/v1/chat/', form, {
-                headers: {
-                    ...form.getHeaders(),
-                }
-            })
-            res.status(200).json({
-                result: data.result
-            });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
-}
-```
-
-When you add this file as `api/ai/hydromind.js`, it automatically creates the endpoint `/ai/hydromind`.
+2. See the plugin example in the /api file but it's not a plugin!!
+## How to save the api/category/file.js file
 
 ## Setup and Usage
 
