@@ -67,8 +67,8 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
 @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
 
-/* Header */
-header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-filter:blur(18px) saturate(180%);border-bottom:1px solid var(--border2);}
+/* ========== HEADER (seperti gambar) ========== */
+header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border2);}
 .header-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
 .logo{font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--fg);text-decoration:none;display:flex;align-items:center;gap:10px;}
 .logo-dot{width:8px;height:8px;background:var(--primary);border-radius:50%;animation:pulseDot 2s ease infinite;}
@@ -77,12 +77,12 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 .nav-pill{font-family:var(--ff-mono);font-size:9px;font-weight:700;color:var(--fg3);letter-spacing:1px;padding:4px 11px;border:1px solid var(--border2);border-radius:8px;background:var(--card2);text-decoration:none;transition:all .2s;}
 .nav-pill:hover{color:var(--fg);border-color:var(--fg3);}
 
-/* Sidebar */
+/* ========== SIDEBAR ========== */
 #sidebar{
-  position:fixed;top:0;left:0;height:100%;width:260px;
+  position:fixed;top:0;left:0;height:100%;width:280px;
   background:var(--card);border-right:1px solid var(--border2);
   z-index:100;display:flex;flex-direction:column;
-  transform:translateX(-100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  transform:translateX(-100%);transition:transform 0.3s ease;
 }
 #sidebar.open{transform:translateX(0);}
 #sidebar .sidebar-header{padding:24px 24px 20px;border-bottom:1px solid var(--border2);}
@@ -97,28 +97,35 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 #sidebar .sidebar-footer{padding:20px;border-top:1px solid var(--border2);font-family:var(--ff-mono);font-size:9px;color:var(--fg3);text-align:center;}
 
 /* Overlay */
-#overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:90;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;backdrop-filter:blur(4px);}
+#overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:90;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;backdrop-filter:blur(4px);}
 #overlay.show{opacity:1;visibility:visible;}
 
 /* Main Content */
 .main-content{padding-left:0;transition:padding-left .3s;}
 @media (min-width:768px){
-  body{padding-left:260px;}
+  body{padding-left:280px;}
   #sidebar{transform:translateX(0);}
   #overlay{display:none;}
-  #menuToggle{display:none;}
+  .menu-toggle{display:none;}
 }
 .main-wrap{max-width:1000px;margin:0 auto;padding:24px 24px 60px;position:relative;z-index:10;}
 
-/* Menu Toggle (≡) */
-#menuToggle{background:var(--card);border:1px solid var(--border2);padding:8px 12px;cursor:pointer;color:var(--fg);font-family:var(--ff-mono);font-size:18px;font-weight:700;}
+/* ========== MENU TOGGLE "=" (bukan icon) ========== */
+.menu-toggle{
+  background:var(--card);border:1px solid var(--border2);
+  width:44px;height:44px;cursor:pointer;color:var(--fg);
+  font-family:var(--ff-mono);font-size:24px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;margin-bottom:20px;
+}
+.menu-toggle:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
 
 /* Banner */
 .banner-wrap{border:1px solid var(--border2);margin-bottom:24px;background:var(--card);}
 .banner-wrap img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
 
 /* Terminal Search */
-.terminal-box{border:1px solid var(--border2);overflow:hidden;margin-bottom:28px;}
+.terminal-box{border:1px solid var(--border2);margin-bottom:28px;}
 .terminal-bar{background:var(--card2);padding:10px 16px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:8px;}
 .terminal-dot{width:10px;height:10px;border-radius:50%;background:#ff5f56;}
 .terminal-dot:nth-child(2){background:#ffbd2e;}
@@ -129,91 +136,86 @@ header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-
 .terminal-input input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font-family:var(--ff-mono);font-size:12px;}
 .terminal-input input::placeholder{color:var(--fg3);}
 
-/* Card */
-.card{background:var(--card);border:1px solid var(--border2);margin-bottom:10px;overflow:hidden;transition:all .2s;}
-.card:hover{border-color:rgba(45,189,126,0.3);}
-.card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--card);transition:background .2s;}
+/* ========== CARD (tidak mengapung) ========== */
+.card{background:var(--card);border:1px solid var(--border2);margin-bottom:12px;overflow:hidden;}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;background:var(--card);}
 .card-header:hover{background:var(--card2);}
-.card-header-left{display:flex;align-items:center;gap:8px;flex:1;}
-.card-header-left .material-icons{color:var(--primary);font-size:18px;transition:transform .2s;}
+.card-header-left{display:flex;align-items:center;gap:12px;flex:1;}
+.card-header-left .material-icons{color:var(--primary);font-size:20px;transition:transform .2s;}
 .card-header-left .material-icons.rotated{transform:rotate(180deg);}
-.card-header-left h3{font-size:12px;font-weight:500;color:var(--fg);}
-.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;}
-.tag{font-family:var(--ff-mono);font-size:7px;padding:2px 6px;background:var(--bg2);border:1px solid var(--border2);color:var(--fg3);letter-spacing:0.5px;}
-.badge-method{font-family:var(--ff-mono);font-size:8px;font-weight:700;padding:3px 8px;flex-shrink:0;}
+.card-header-left h3{font-size:14px;font-weight:500;color:var(--fg);}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.tag{font-family:var(--ff-mono);font-size:7px;padding:2px 8px;background:var(--bg2);border:1px solid var(--border2);color:var(--fg3);}
+.badge-method{font-family:var(--ff-mono);font-size:8px;font-weight:700;padding:4px 10px;}
 .badge-get{background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.25);}
 .badge-post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
-.menu-dots{color:var(--fg3);cursor:pointer;padding:4px;border-radius:4px;transition:all .2s;}
-.menu-dots:hover{background:var(--bg2);color:var(--fg);}
-.card-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border2);background:var(--card);}
+.menu-dots{color:var(--fg3);cursor:pointer;padding:4px;}
+.menu-dots:hover{color:var(--fg);}
+.card-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border2);background:var(--card);}
 
 /* Tab Methods */
-.tab-container{display:flex;gap:0;border-bottom:1px solid var(--border2);margin-bottom:14px;}
-.tab-btn{padding:8px 14px;font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg3);background:transparent;border:none;cursor:pointer;transition:all .2s;position:relative;}
-.tab-btn.active{color:var(--primary);}
-.tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--primary);}
+.tab-container{display:flex;gap:0;border-bottom:1px solid var(--border2);margin-bottom:16px;padding-top:8px;}
+.tab-btn{padding:8px 16px;font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg3);background:transparent;border:none;cursor:pointer;}
+.tab-btn.active{color:var(--primary);border-bottom:2px solid var(--primary);margin-bottom:-1px;}
 .method-content{display:none;}
 .method-content.active{display:block;}
 
-/* Form Elements */
-.param-group{margin-bottom:10px;}
-.param-group label{display:block;font-family:var(--ff-mono);font-size:8px;font-weight:700;color:var(--fg2);margin-bottom:3px;text-transform:uppercase;}
-.param-group input,.param-group select,.param-group textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);padding:7px 9px;color:var(--fg);font-family:var(--ff-mono);font-size:9px;outline:none;transition:all .2s;}
-.param-group input:focus,.param-group select:focus,.param-group textarea:focus{border-color:var(--primary);}
-.param-group input::placeholder{color:var(--fg3);}
-.param-group .desc{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);margin-top:2px;}
-.btn-execute{width:100%;background:var(--primary);border:none;padding:8px;color:#fff;font-family:var(--ff-mono);font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;margin-top:5px;}
-.btn-execute:hover{background:var(--primary2);box-shadow:var(--glow);}
-.button-group{display:flex;gap:8px;margin-top:10px;}
+/* Form */
+.param-group{margin-bottom:14px;}
+.param-group label{display:block;font-family:var(--ff-mono);font-size:8px;font-weight:700;color:var(--fg2);margin-bottom:4px;text-transform:uppercase;}
+.param-group input,.param-group select,.param-group textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);padding:8px 12px;color:var(--fg);font-family:var(--ff-mono);font-size:9px;outline:none;}
+.param-group input:focus{border-color:var(--primary);}
+.param-group .desc{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);margin-top:3px;}
+.btn-execute{width:100%;background:var(--primary);border:none;padding:10px;color:#fff;font-family:var(--ff-mono);font-size:9px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;}
+.btn-execute:hover{background:var(--primary2);}
+.button-group{display:flex;gap:12px;margin-top:14px;}
 .button-group button{flex:1;}
 
-/* Status Code Table di dalam card */
-.status-table-card{border:1px solid var(--border2);overflow:hidden;margin-top:14px;}
+/* Status Code Table */
+.status-table-card{border:1px solid var(--border2);margin-top:18px;}
 .status-table-header-card{background:var(--card2);padding:8px 12px;border-bottom:1px solid var(--border2);}
-.status-table-header-card span{font-family:var(--ff-mono);font-size:8px;font-weight:700;color:var(--fg2);text-transform:uppercase;letter-spacing:1px;}
+.status-table-header-card span{font-family:var(--ff-mono);font-size:8px;font-weight:700;color:var(--fg2);}
 .status-table-card table{width:100%;border-collapse:collapse;}
-.status-table-card th,.status-table-card td{padding:6px 10px;text-align:left;font-family:var(--ff-mono);font-size:8px;border-bottom:1px solid var(--border2);}
-.status-table-card th{color:var(--fg3);font-weight:500;background:rgba(0,0,0,0.2);}
+.status-table-card th,.status-table-card td{padding:8px 12px;text-align:left;font-family:var(--ff-mono);font-size:8px;border-bottom:1px solid var(--border2);}
+.status-table-card th{color:var(--fg3);background:rgba(0,0,0,0.2);}
 .status-table-card td{color:var(--fg2);}
-.status-table-card tr:last-child td{border-bottom:none;}
-.status-icon{font-size:12px;vertical-align:middle;margin-right:4px;}
+.status-icon{font-size:12px;vertical-align:middle;margin-right:6px;}
 .status-icon.ok{color:var(--primary);}
 .status-icon.err{color:var(--red);}
 .status-icon.warning{color:var(--yellow);}
 
-/* Response Section dengan warna JSON */
-.response-section{margin-top:14px;}
-.response-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.response-status{font-family:var(--ff-mono);font-size:8px;padding:3px 8px;}
+/* Response */
+.response-section{margin-top:18px;}
+.response-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.response-status{font-family:var(--ff-mono);font-size:8px;padding:4px 12px;}
 .response-status.ok{background:rgba(45,189,126,0.1);color:var(--primary);border:1px solid rgba(45,189,126,0.2);}
 .response-status.err{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid rgba(248,113,113,0.2);}
-.response-timing{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:3px 7px;}
-.response-copy{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:3px 8px;cursor:pointer;}
-.response-box{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;}
-.response-box-header{padding:7px 10px;border-bottom:1px solid var(--border2);font-family:var(--ff-mono);font-size:7px;color:var(--fg3);text-transform:uppercase;}
-.response-content{padding:10px;font-family:var(--ff-mono);font-size:9px;overflow-x:auto;max-height:250px;overflow-y:auto;}
-.response-content pre{margin:0;white-space:pre-wrap;word-break:break-all;}
-.response-content img{max-width:100%;border-radius:4px;margin-top:8px;}
-/* Warna JSON */
+.response-timing{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:4px 10px;}
+.response-copy{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:4px 12px;cursor:pointer;}
+.response-box{background:var(--bg2);border:1px solid var(--border2);}
+.response-box-header{padding:8px 12px;border-bottom:1px solid var(--border2);font-family:var(--ff-mono);font-size:7px;color:var(--fg3);}
+.response-content{padding:12px;font-family:var(--ff-mono);font-size:9px;overflow-x:auto;max-height:250px;overflow-y:auto;}
+.response-content pre{margin:0;white-space:pre-wrap;}
+
+/* JSON Colors */
 .j-key{color:#7eb3ff;}.j-str{color:#a8e6a3;}.j-num{color:#ffb86c;}.j-bool{color:#f883d9;}.j-null{color:#f87171;}.j-punc{color:#3d6650;}
 
 /* Code Block */
-.code-block{background:var(--bg2);border:1px solid var(--border2);margin-top:10px;overflow:hidden;}
-.code-header{padding:7px 10px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
-.code-header span{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);text-transform:uppercase;}
+.code-block{background:var(--bg2);border:1px solid var(--border2);margin-top:14px;}
+.code-header{padding:8px 12px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
+.code-header span{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);}
 .code-copy{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:none;border:none;cursor:pointer;}
-.code-pre{padding:10px;font-family:var(--ff-mono);font-size:8px;white-space:pre-wrap;overflow-x:auto;line-height:1.4;}
+.code-pre{padding:12px;font-family:var(--ff-mono);font-size:8px;white-space:pre-wrap;}
 
 /* Footer */
 hr.sep{border:none;border-top:1px solid var(--border2);max-width:1000px;margin:0 auto;}
 footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20px;}
-.footer-inner{max-width:1000px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.footer-inner{max-width:1000px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-brand{font-family:var(--ff-disp);font-size:20px;color:var(--fg);letter-spacing:2px;}
 .footer-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);}
 .footer-copy a{color:var(--primary);text-decoration:none;}
 .footer-copy a:hover{text-decoration:underline;}
 
-/* No Results */
 #noResults{display:none;text-align:center;padding:48px 24px;}
 </style>
 </head>
@@ -228,21 +230,22 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
   <div class="loader-text">loading</div>
 </div>
 
-<!-- HEADER -->
+<!-- HEADER (seperti gambar) -->
 <header>
   <div class="header-inner">
     <a class="logo" href="/">
       <span class="logo-dot"></span>
-      <span id="hdr-title">BASE-SIMPLE</span>
+      <span>BASE-SIMPLE</span>
       <span class="logo-badge">API</span>
     </a>
     <div class="nav-row">
       <a class="nav-pill" href="https://github.com/izuku-mii/Base-Api" target="_blank">Base Script Api</a>
-      <a class="nav-pill" id="hdr-author" href="https://github.com/izuku-mii" target="_blank">@oota_asik_sendiri</a>
+      <a class="nav-pill" href="https://github.com/izuku-mii" target="_blank">@oota_asik_sendiri</a>
     </div>
   </div>
 </header>
 
+<!-- SIDEBAR -->
 <aside id="sidebar">
   <div class="sidebar-header">
     <h1>BASE-SIMPLE</h1>
@@ -254,7 +257,7 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
     <div id="category-list"></div>
   </nav>
   <div class="sidebar-footer">
-    <span>@oota_asik_sendiri</span>
+    <span>© 2026 @oota_asik_sendiri</span>
   </div>
 </aside>
 
@@ -263,17 +266,15 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
 <div class="main-content">
   <div class="main-wrap">
     
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
-      <button id="menuToggle" class="material-icons">menu</button>
-      <div></div>
-    </div>
+    <!-- MENU TOGGLE "=" -->
+    <button class="menu-toggle" id="menuToggle">=</button>
 
     <!-- BANNER -->
     <div class="banner-wrap">
       <img src="./assets/banner.jpg" alt="Banner" onerror="this.style.display='none'"/>
     </div>
 
-    <!-- Terminal Search -->
+    <!-- TERMINAL SEARCH -->
     <div class="terminal-box">
       <div class="terminal-bar">
         <div class="terminal-dot"></div>
@@ -287,7 +288,7 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
       </div>
     </div>
 
-    <!-- Endpoints List -->
+    <!-- ENDPOINTS LIST -->
     <div id="ep-list"></div>
     <div id="noResults">
       <div style="font-size:48px;opacity:0.3;margin-bottom:12px;">⌕</div>
@@ -324,15 +325,13 @@ function tokenizeJSON(v, d) {
   if (Array.isArray(v)) {
     if (!v.length) return '<span class="j-punc">[]</span>';
     const ind = '  '.repeat(d + 1);
-    const items = v.map(function(x) { return ind + tokenizeJSON(x, d + 1); });
+    const items = v.map(x => ind + tokenizeJSON(x, d + 1));
     return '<span class="j-punc">[</span>\n' + items.join('<span class="j-punc">,</span>\n') + '\n' + '  '.repeat(d) + '<span class="j-punc">]</span>';
   }
   const keys = Object.keys(v);
   if (!keys.length) return '<span class="j-punc">{}</span>';
   const ind = '  '.repeat(d + 1);
-  const items = keys.map(function(k) {
-    return ind + '<span class="j-key">"' + esc(k) + '"</span><span class="j-punc">: </span>' + tokenizeJSON(v[k], d + 1);
-  });
+  const items = keys.map(k => ind + '<span class="j-key">"' + esc(k) + '"</span><span class="j-punc">: </span>' + tokenizeJSON(v[k], d + 1));
   return '<span class="j-punc">{</span>\n' + items.join('<span class="j-punc">,</span>\n') + '\n' + '  '.repeat(d) + '<span class="j-punc">}</span>';
 }
 
@@ -342,9 +341,7 @@ function extractParamsFromPath(path) {
   const params = [];
   const queryStart = path.indexOf('?');
   if (queryStart !== -1) {
-    const queryString = path.slice(queryStart + 1);
-    const pairs = queryString.split('&');
-    pairs.forEach(pair => {
+    path.slice(queryStart + 1).split('&').forEach(pair => {
       const eqIndex = pair.indexOf('=');
       if (eqIndex !== -1) params.push(pair.slice(0, eqIndex));
       else if (pair) params.push(pair);
@@ -366,15 +363,15 @@ function convertEndpointData(rawData) {
         const isPost = item.post === true;
         const paramsFromPath = extractParamsFromPath(item.path);
         const hasFileUpload = item.paramsFile && item.paramsFile.length;
-        let parameters = { required: [], optional: [] };
+        let parameters = { required: [] };
         if (item.params && item.params.length) {
           item.params.forEach(p => {
             const paramName = p.replace(/=$/, '');
-            parameters.required.push({ name: paramName, description: item.desc || `Enter ${paramName}`, example: `your_${paramName}_here` });
+            parameters.required.push({ name: paramName, description: item.desc || `Enter ${paramName}`, example: `your_${paramName}` });
           });
         } else if (paramsFromPath.length) {
           paramsFromPath.forEach(paramName => {
-            parameters.required.push({ name: paramName, description: item.desc || `Enter ${paramName}`, example: `your_${paramName}_here` });
+            parameters.required.push({ name: paramName, description: item.desc || `Enter ${paramName}`, example: `your_${paramName}` });
           });
         }
         let alias = item.path.split('?')[0].split('/').pop();
@@ -383,14 +380,13 @@ function convertEndpointData(rawData) {
           alias = parent ? `${parent} ${alias}` : alias;
         }
         alias = alias.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        const endpointObj = {
-          id: result.length, alias: alias, method: isPost ? "POST" : "GET",
+        result.push({
+          id: result.length, alias, method: isPost ? "POST" : "GET",
           methods: [isPost ? "POST" : "GET"], path: item.path.split('?')[0],
           category: categoryName, tags: [categoryName, isPost ? "Upload" : "Download"],
-          parameters: parameters, hasFileUpload: hasFileUpload, originalDesc: item.desc, rawPath: item.path
-        };
-        result.push(endpointObj);
-        categoriesMap.get(categoryName).push(endpointObj);
+          parameters, hasFileUpload, rawPath: item.path
+        });
+        categoriesMap.get(categoryName).push(result[result.length - 1]);
       });
     }
   });
@@ -398,7 +394,6 @@ function convertEndpointData(rawData) {
 }
 
 function renderSidebarCategories() {
-  const container = document.getElementById('category-list');
   document.getElementById('count-all').textContent = endpointsDataGlobal.length;
   let html = '';
   for (let [catName, items] of categoriesMap) {
@@ -406,25 +401,30 @@ function renderSidebarCategories() {
       html += `<a href="#" data-category="${esc(catName)}">${esc(catName)} <span class="count">${items.length}</span></a>`;
     }
   }
-  container.innerHTML = html;
+  document.getElementById('category-list').innerHTML = html;
   document.querySelectorAll('#sidebar-nav a[data-category]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       currentCategory = link.getAttribute('data-category');
       document.querySelectorAll('#sidebar-nav a').forEach(a => a.classList.remove('active'));
       link.classList.add('active');
-      if (currentCategory === 'all') renderEndpoints('');
-      else renderFilteredEndpoints(endpointsDataGlobal.filter(ep => ep.category === currentCategory));
+      renderEndpoints('');
     });
   });
 }
 
-function renderFilteredEndpoints(endpoints) {
+function renderEndpoints(filter = '') {
+  const searchTerm = filter.toLowerCase();
+  let filtered = endpointsDataGlobal;
+  if (searchTerm) filtered = endpointsDataGlobal.filter(ep => ep.alias.toLowerCase().includes(searchTerm) || ep.path.toLowerCase().includes(searchTerm));
+  if (currentCategory !== 'all') filtered = filtered.filter(ep => ep.category === currentCategory);
+  
   const container = document.getElementById('ep-list');
   const noResults = document.getElementById('noResults');
-  if (endpoints.length === 0) { container.innerHTML = ''; noResults.style.display = 'block'; return; }
+  if (filtered.length === 0) { container.innerHTML = ''; noResults.style.display = 'block'; return; }
   noResults.style.display = 'none';
-  container.innerHTML = endpoints.map(ep => `
+  
+  container.innerHTML = filtered.map(ep => `
     <div class="card">
       <div class="card-header" onclick="toggleCard(${ep.id})">
         <div class="card-header-left">
@@ -433,114 +433,111 @@ function renderFilteredEndpoints(endpoints) {
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <span class="badge-method ${ep.method === 'GET' ? 'badge-get' : 'badge-post'}">${ep.method}</span>
-          <span class="material-icons menu-dots" onclick="event.stopPropagation();showEndpointMenu('${ep.path}')">more_vert</span>
+          <span class="material-icons menu-dots" onclick="event.stopPropagation();showMenu('${ep.path}')">more_vert</span>
         </div>
       </div>
       <div class="card-body" id="card-body-${ep.id}">
         <div class="tab-container">${ep.methods.map(m => `<button class="tab-btn ${m === ep.method ? 'active' : ''}" onclick="switchMethod(${ep.id}, '${m}')">${m}</button>`).join('')}</div>
         <div id="method-content-${ep.id}" class="method-content active">
-          ${ep.parameters?.required?.map(p => `<div class="param-group"><label>${esc(p.name)}</label><input type="text" name="${esc(p.name)}" placeholder="${esc(p.example || '')}" value="${esc(p.example || '')}" oninput="updateCurl(${ep.id})"><div class="desc">${esc(p.description || '')}</div></div>`).join('')}
-          ${ep.hasFileUpload ? `<div class="param-group"><label>File Upload</label><input type="file" name="file" onchange="updateCurl(${ep.id})"><div class="desc">Upload image/file for processing</div></div>` : ''}
+          ${ep.parameters.required.map(p => `<div class="param-group"><label>${esc(p.name)}</label><input type="text" name="${esc(p.name)}" placeholder="${esc(p.example)}" value="${esc(p.example)}" oninput="updateCurl(${ep.id})"><div class="desc">${esc(p.description)}</div></div>`).join('')}
+          ${ep.hasFileUpload ? `<div class="param-group"><label>File Upload</label><input type="file" name="file" onchange="updateCurl(${ep.id})"><div class="desc">Upload image/file</div></div>` : ''}
         </div>
         <div class="button-group"><button class="btn-execute" onclick="executeRequest(${ep.id})"><span class="material-icons" style="font-size:10px;">play_arrow</span> EXECUTE</button><button class="btn-execute" style="background:var(--card2);color:var(--fg2);" onclick="clearResponse(${ep.id})"><span class="material-icons" style="font-size:10px;">clear</span> CLEAR</button></div>
         <div class="response-section" id="response-${ep.id}" style="display:none;"><div class="response-header"><span class="response-status ok" id="resp-status-${ep.id}">200 OK</span><span class="response-timing" id="resp-time-${ep.id}">—ms</span><button class="response-copy" onclick="copyResponse(${ep.id})">Copy</button></div><div class="response-box"><div class="response-box-header">Response</div><div class="response-content" id="resp-content-${ep.id}"><pre>Send a request...</pre></div></div></div>
         <div class="code-block"><div class="code-header"><span>cURL</span><button class="code-copy" onclick="copyCurl(${ep.id})">copy</button></div><div class="code-pre" id="curl-pre-${ep.id}">curl -X GET "${window.location.origin}${ep.path}"</div></div>
-        ${statusCodesHTML}
+        <div class="status-table-card"><div class="status-table-header-card"><span>📋 HTTP Status Codes</span></div><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="material-icons status-icon ok">check_circle</span> 200</td><td>OK - Request successful</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 400</td><td>Bad Request - Invalid parameters</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 401</td><td>Unauthorized - Invalid API key</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 403</td><td>Forbidden - No permission</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 404</td><td>Not Found - Resource not found</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 405</td><td>Method Not Allowed</td></tr>
+          <tr><td><span class="material-icons status-icon warning">warning</span> 429</td><td>Too Many Requests - Rate limit</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 500</td><td>Internal Server Error</td></tr>
+          <tr><td><span class="material-icons status-icon err">error</span> 503</td><td>Service Unavailable</td></tr>
+        </tbody></table></div>
       </div>
     </div>
   `).join('');
   endpointsDataGlobal.forEach(ep => updateCurl(ep.id));
 }
 
-const statusCodesHTML = `<div class="status-table-card"><div class="status-table-header-card"><span>📋 HTTP Status Codes</span></div><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td><span class="material-icons status-icon ok" style="font-size:12px;">check_circle</span> 200</td><td>OK - Request successful</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 400</td><td>Bad Request - Invalid parameters or missing required fields</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 401</td><td>Unauthorized - Missing or invalid API key</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 403</td><td>Forbidden - You do not have permission to access this resource</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 404</td><td>Not Found - The requested resource could not be found</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 405</td><td>Method Not Allowed - HTTP method not supported for this resource</td></tr><tr><td><span class="material-icons status-icon warning" style="font-size:12px;">warning</span> 429</td><td>Too Many Requests - You have hit the rate limit</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 500</td><td>Internal Server Error - Something went wrong on our end</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 503</td><td>Service Unavailable - The server is temporarily unavailable</td></tr></tbody></table></div>`;
-
-function renderEndpoints(filter = '') {
-  const searchTerm = filter.toLowerCase();
-  let filtered = endpointsDataGlobal;
-  if (searchTerm) filtered = endpointsDataGlobal.filter(ep => ep.alias.toLowerCase().includes(searchTerm) || ep.path.toLowerCase().includes(searchTerm) || ep.tags.some(t => t.toLowerCase().includes(searchTerm)));
-  if (currentCategory !== 'all') filtered = filtered.filter(ep => ep.category === currentCategory);
-  renderFilteredEndpoints(filtered);
-}
-
-function showEndpointMenu(path) {
-  removeMenu();
+function showMenu(path) {
+  const existing = document.getElementById('temp-menu');
+  if (existing) existing.remove();
   const div = document.createElement('div');
-  div.innerHTML = `<div id="temp-menu" style="position:fixed;background:var(--card2);border:1px solid var(--border2);z-index:200;min-width:150px;"><div style="padding:8px 12px;font-family:var(--ff-mono);font-size:10px;color:var(--fg3);border-bottom:1px solid var(--border2);">Options</div><div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="copyEndpointLink('${path}');removeMenu()">🔗 Copy Link</div><div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="copyFullUrl('${path}');removeMenu()">📋 Copy Full URL</div><div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="removeMenu()">✖ Close</div></div>`;
+  div.innerHTML = `<div id="temp-menu" style="position:fixed;background:var(--card2);border:1px solid var(--border2);z-index:200;min-width:160px;"><div style="padding:10px 14px;border-bottom:1px solid var(--border2);font-family:monospace;font-size:10px;">Options</div><div style="padding:10px 14px;cursor:pointer;" onclick="copyLink('${path}')">🔗 Copy Link</div><div style="padding:10px 14px;cursor:pointer;" onclick="copyUrl('${path}')">📋 Copy Full URL</div><div style="padding:10px 14px;cursor:pointer;border-top:1px solid var(--border2);" onclick="this.parentElement.remove()">✖ Close</div></div>`;
   document.body.appendChild(div.firstChild);
   const menu = document.getElementById('temp-menu');
   if (menu) { menu.style.top = (window.event?.clientY || 100) + 'px'; menu.style.left = (window.event?.clientX || 100) + 'px'; }
-  setTimeout(() => { document.addEventListener('click', function removeHandler(e) { if (menu && !menu.contains(e.target)) { removeMenu(); document.removeEventListener('click', removeHandler); } }); }, 100);
+  setTimeout(() => {
+    document.addEventListener('click', function rm(e) { if (menu && !menu.contains(e.target)) { menu.remove(); document.removeEventListener('click', rm); } });
+  }, 100);
 }
 
-function removeMenu() { const existing = document.getElementById('temp-menu'); if (existing) existing.remove(); }
-function copyEndpointLink(path) { navigator.clipboard.writeText(window.location.origin + path); }
-function copyFullUrl(path) { navigator.clipboard.writeText(window.location.origin + path); }
-function toggleCard(idx) { const body = document.getElementById(`card-body-${idx}`); const icon = document.getElementById(`card-icon-${idx}`); if (body.style.display === 'none' || !body.style.display) { body.style.display = 'block'; icon.classList.remove('rotated'); } else { body.style.display = 'none'; icon.classList.add('rotated'); } }
-function switchMethod(idx, method) { updateCurl(idx); }
-function buildCurl(idx) {
-  const ep = endpointsDataGlobal.find(e => e.id === idx); if (!ep) return '';
+function copyLink(path) { navigator.clipboard.writeText(window.location.origin + path); document.getElementById('temp-menu')?.remove(); }
+function copyUrl(path) { navigator.clipboard.writeText(window.location.origin + path); document.getElementById('temp-menu')?.remove(); }
+function toggleCard(id) { const body = document.getElementById(`card-body-${id}`); const icon = document.getElementById(`card-icon-${id}`); if (body.style.display === 'none' || !body.style.display) { body.style.display = 'block'; icon.classList.remove('rotated'); } else { body.style.display = 'none'; icon.classList.add('rotated'); } }
+function switchMethod(id, method) { updateCurl(id); }
+function buildCurl(id) {
+  const ep = endpointsDataGlobal.find(e => e.id === id); if (!ep) return '';
   let url = window.location.origin + ep.path;
   if (ep.method === 'GET') {
-    const params = []; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) params.push(`${encodeURIComponent(i.name)}=${encodeURIComponent(i.value)}`); });
+    const params = []; document.querySelectorAll(`#card-body-${id} input[type="text"]`).forEach(i => { if (i.value) params.push(`${encodeURIComponent(i.name)}=${encodeURIComponent(i.value)}`); });
     if (params.length) url += '?' + params.join('&');
     return `curl -X GET "${url}"`;
   } else {
-    const bodyObj = {}; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) bodyObj[i.name] = i.value; });
-    const fileInput = document.querySelector(`#card-body-${idx} input[type="file"]`);
-    if (fileInput && fileInput.files && fileInput.files[0]) return `curl -X POST "${url}" \\\n  -F "image=@${fileInput.files[0].name}"`;
-    else if (Object.keys(bodyObj).length) return `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(bodyObj)}'`;
-    else return `curl -X POST "${url}"`;
+    const bodyObj = {}; document.querySelectorAll(`#card-body-${id} input[type="text"]`).forEach(i => { if (i.value) bodyObj[i.name] = i.value; });
+    const fileInput = document.querySelector(`#card-body-${id} input[type="file"]`);
+    if (fileInput?.files?.[0]) return `curl -X POST "${url}" \\\n  -F "image=@${fileInput.files[0].name}"`;
+    if (Object.keys(bodyObj).length) return `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(bodyObj)}'`;
+    return `curl -X POST "${url}"`;
   }
 }
-function updateCurl(idx) { const el = document.getElementById(`curl-pre-${idx}`); if (el) el.textContent = buildCurl(idx); }
-function copyCurl(idx) { const el = document.getElementById(`curl-pre-${idx}`); if (el) { navigator.clipboard.writeText(el.textContent); const btn = el.parentElement.querySelector('.code-copy'); const orig = btn.textContent; btn.textContent = '✓'; setTimeout(() => btn.textContent = orig, 1500); } }
-function copyResponse(idx) { if (currentResponse) { navigator.clipboard.writeText(JSON.stringify(currentResponse, null, 2)); const btn = document.querySelector(`#response-${idx} .response-copy`); const orig = btn.textContent; btn.textContent = '✓'; setTimeout(() => btn.textContent = orig, 1500); } }
-function clearResponse(idx) { const sec = document.getElementById(`response-${idx}`); if (sec) sec.style.display = 'none'; currentResponse = null; }
+function updateCurl(id) { const el = document.getElementById(`curl-pre-${id}`); if (el) el.textContent = buildCurl(id); }
+function copyCurl(id) { const el = document.getElementById(`curl-pre-${id}`); if (el) { navigator.clipboard.writeText(el.textContent); } }
+function copyResponse(id) { if (currentResponse) navigator.clipboard.writeText(JSON.stringify(currentResponse, null, 2)); }
+function clearResponse(id) { const sec = document.getElementById(`response-${id}`); if (sec) sec.style.display = 'none'; currentResponse = null; }
 
-async function executeRequest(idx) {
-  const ep = endpointsDataGlobal.find(e => e.id === idx); if (!ep) return;
+async function executeRequest(id) {
+  const ep = endpointsDataGlobal.find(e => e.id === id); if (!ep) return;
   let url = window.location.origin + ep.path;
   const start = Date.now();
-  const sec = document.getElementById(`response-${idx}`), cont = document.getElementById(`resp-content-${idx}`), stat = document.getElementById(`resp-status-${idx}`), tim = document.getElementById(`resp-time-${idx}`);
+  const sec = document.getElementById(`response-${id}`), cont = document.getElementById(`resp-content-${id}`), stat = document.getElementById(`resp-status-${id}`), tim = document.getElementById(`resp-time-${id}`);
   cont.innerHTML = '<pre>Loading...</pre>'; sec.style.display = 'block';
   try {
     let response;
     if (ep.method === 'GET') {
-      const params = []; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) params.push(`${encodeURIComponent(i.name)}=${encodeURIComponent(i.value)}`); });
+      const params = []; document.querySelectorAll(`#card-body-${id} input[type="text"]`).forEach(i => { if (i.value) params.push(`${encodeURIComponent(i.name)}=${encodeURIComponent(i.value)}`); });
       if (params.length) url += '?' + params.join('&');
       response = await fetch(url);
     } else {
-      const fileInput = document.querySelector(`#card-body-${idx} input[type="file"]`);
-      if (fileInput && fileInput.files && fileInput.files[0]) {
+      const fileInput = document.querySelector(`#card-body-${id} input[type="file"]`);
+      if (fileInput?.files?.[0]) {
         const fd = new FormData(); fd.append('image', fileInput.files[0]);
         response = await fetch(url, { method: 'POST', body: fd });
       } else {
-        const bodyObj = {}; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) bodyObj[i.name] = i.value; });
+        const bodyObj = {}; document.querySelectorAll(`#card-body-${id} input[type="text"]`).forEach(i => { if (i.value) bodyObj[i.name] = i.value; });
         response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: Object.keys(bodyObj).length ? JSON.stringify(bodyObj) : undefined });
       }
     }
     const ms = Date.now() - start;
-    const isOk = response.ok;
-    const ct = response.headers.get('content-type');
-    if (ct && (ct.includes('image/') || ct.includes('video/') || ct.includes('audio/') || ct.includes('application/pdf'))) {
+    const ct = response.headers.get('content-type') || '';
+    if (ct.includes('image/')) {
       const blob = await response.blob(); const objUrl = URL.createObjectURL(blob);
-      currentResponse = { media: true, type: ct, url: objUrl };
-      if (ct.includes('image/')) cont.innerHTML = `<img src="${objUrl}" style="max-width:100%;border-radius:4px;"/>`;
-      else if (ct.includes('video/')) cont.innerHTML = `<video controls style="max-width:100%;border-radius:4px;"><source src="${objUrl}" type="${ct}"></video>`;
-      else if (ct.includes('audio/')) cont.innerHTML = `<audio controls style="width:100%;"><source src="${objUrl}" type="${ct}"></audio>`;
-      else cont.innerHTML = `<iframe src="${objUrl}" style="width:100%;height:300px;border:none;"></iframe>`;
-    } else if (ct && ct.includes('application/json')) {
+      currentResponse = { media: true };
+      cont.innerHTML = `<img src="${objUrl}" style="max-width:100%;border-radius:4px;"/>`;
+    } else if (ct.includes('application/json')) {
       const data = await response.json(); currentResponse = data;
-      const coloredJSON = tokenizeJSON(data, 0);
-      cont.innerHTML = `<pre style="margin:0;white-space:pre-wrap;">${coloredJSON}</pre>`;
+      cont.innerHTML = `<pre style="margin:0;font-family:var(--ff-mono);font-size:9px;">${tokenizeJSON(data, 0)}</pre>`;
     } else {
       const data = await response.text(); currentResponse = data;
       cont.innerHTML = `<pre>${esc(data)}</pre>`;
     }
     stat.textContent = `${response.status} ${response.statusText}`;
-    stat.className = `response-status ${isOk ? 'ok' : 'err'}`;
+    stat.className = `response-status ${response.ok ? 'ok' : 'err'}`;
     tim.textContent = `${ms}ms`;
-    updateCurl(idx);
+    updateCurl(id);
   } catch (error) {
     stat.textContent = '500 Error'; stat.className = 'response-status err';
     tim.textContent = `${Date.now() - start}ms`;
@@ -552,29 +549,30 @@ function setupSearch() { document.getElementById('searchInput')?.addEventListene
 
 async function loadEndpoints() {
   try {
-    const response = await fetch('/endpoint');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
+    const res = await fetch('/endpoint');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
     endpointsDataGlobal = convertEndpointData(data);
     renderSidebarCategories();
     renderEndpoints('');
   } catch (error) {
-    console.error('Gagal load /endpoint:', error);
-    document.getElementById('ep-list').innerHTML = `<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)"><div>❌ Gagal memuat endpoint</div><div style="font-size:11px;margin-top:12px;">${esc(error.message)}</div><div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div></div>`;
+    document.getElementById('ep-list').innerHTML = `<div class="card" style="padding:40px;text-align:center;color:var(--red);"><div>❌ Gagal memuat endpoint</div><div style="font-size:11px;">${error.message}</div></div>`;
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   loadEndpoints(); setupSearch();
-  const sidebar = document.getElementById('sidebar'), overlay = document.getElementById('overlay'), menuToggle = document.getElementById('menuToggle');
-  if (menuToggle) menuToggle.addEventListener('click', () => { sidebar.classList.add('open'); overlay.classList.add('show'); });
-  if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('show'); });
-  setTimeout(() => { const loader = document.getElementById('loader'); if (loader) loader.classList.add('out'); }, 500);
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  if (menuToggle) menuToggle.onclick = () => { sidebar.classList.add('open'); overlay.classList.add('show'); };
+  if (overlay) overlay.onclick = () => { sidebar.classList.remove('open'); overlay.classList.remove('show'); };
+  setTimeout(() => document.getElementById('loader')?.classList.add('out'), 500);
 });
 
 window.toggleCard = toggleCard; window.switchMethod = switchMethod; window.executeRequest = executeRequest; window.clearResponse = clearResponse;
-window.updateCurl = updateCurl; window.copyCurl = copyCurl; window.copyResponse = copyResponse; window.showEndpointMenu = showEndpointMenu;
-window.copyEndpointLink = copyEndpointLink; window.copyFullUrl = copyFullUrl; window.removeMenu = removeMenu;
+window.updateCurl = updateCurl; window.copyCurl = copyCurl; window.copyResponse = copyResponse; window.showMenu = showMenu;
+window.copyLink = copyLink; window.copyUrl = copyUrl;
 </script>
 </body>
 </html>
