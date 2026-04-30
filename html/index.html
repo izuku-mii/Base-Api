@@ -66,9 +66,16 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 @keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
 @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
-.a1{animation:fadeUp .55s .05s ease both;}
-.a2{animation:fadeUp .55s .12s ease both;}
-.a3{animation:fadeUp .55s .19s ease both;}
+
+/* Header */
+header{position:sticky;top:0;z-index:200;background:rgba(7,21,16,0.88);backdrop-filter:blur(18px) saturate(180%);border-bottom:1px solid var(--border2);}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:var(--ff-mono);font-size:13px;font-weight:700;color:var(--fg);text-decoration:none;display:flex;align-items:center;gap:10px;}
+.logo-dot{width:8px;height:8px;background:var(--primary);border-radius:50%;animation:pulseDot 2s ease infinite;}
+.logo-badge{font-size:9px;font-weight:700;background:var(--primary2);color:#fff;padding:2px 8px;letter-spacing:1px;border-radius:6px;}
+.nav-row{display:flex;align-items:center;gap:6px;}
+.nav-pill{font-family:var(--ff-mono);font-size:9px;font-weight:700;color:var(--fg3);letter-spacing:1px;padding:4px 11px;border:1px solid var(--border2);border-radius:8px;background:var(--card2);text-decoration:none;transition:all .2s;}
+.nav-pill:hover{color:var(--fg);border-color:var(--fg3);}
 
 /* Sidebar */
 #sidebar{
@@ -99,14 +106,12 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
   body{padding-left:260px;}
   #sidebar{transform:translateX(0);}
   #overlay{display:none;}
-  #sidebarToggle{display:none;}
-  #sidebarClose{display:none;}
+  #menuToggle{display:none;}
 }
 .main-wrap{max-width:1000px;margin:0 auto;padding:24px 24px 60px;position:relative;z-index:10;}
 
-/* Header Top */
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
-#sidebarToggle{background:var(--card);border:1px solid var(--border2);padding:8px 12px;cursor:pointer;color:var(--fg);font-family:var(--ff-mono);font-size:12px;}
+/* Menu Toggle (≡) */
+#menuToggle{background:var(--card);border:1px solid var(--border2);padding:8px 12px;cursor:pointer;color:var(--fg);font-family:var(--ff-mono);font-size:18px;font-weight:700;}
 
 /* Banner */
 .banner-wrap{border:1px solid var(--border2);margin-bottom:24px;background:var(--card);}
@@ -124,7 +129,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 .terminal-input input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font-family:var(--ff-mono);font-size:12px;}
 .terminal-input input::placeholder{color:var(--fg3);}
 
-/* Card - ukuran kecil */
+/* Card */
 .card{background:var(--card);border:1px solid var(--border2);margin-bottom:10px;overflow:hidden;transition:all .2s;}
 .card:hover{border-color:rgba(45,189,126,0.3);}
 .card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--card);transition:background .2s;}
@@ -176,7 +181,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 .status-icon.err{color:var(--red);}
 .status-icon.warning{color:var(--yellow);}
 
-/* Response Section */
+/* Response Section dengan warna JSON */
 .response-section{margin-top:14px;}
 .response-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .response-status{font-family:var(--ff-mono);font-size:8px;padding:3px 8px;}
@@ -186,9 +191,11 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 .response-copy{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:3px 8px;cursor:pointer;}
 .response-box{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;}
 .response-box-header{padding:7px 10px;border-bottom:1px solid var(--border2);font-family:var(--ff-mono);font-size:7px;color:var(--fg3);text-transform:uppercase;}
-.response-content{padding:10px;font-family:var(--ff-mono);font-size:9px;overflow-x:auto;max-height:200px;overflow-y:auto;}
+.response-content{padding:10px;font-family:var(--ff-mono);font-size:9px;overflow-x:auto;max-height:250px;overflow-y:auto;}
 .response-content pre{margin:0;white-space:pre-wrap;word-break:break-all;}
 .response-content img{max-width:100%;border-radius:4px;margin-top:8px;}
+/* Warna JSON */
+.j-key{color:#7eb3ff;}.j-str{color:#a8e6a3;}.j-num{color:#ffb86c;}.j-bool{color:#f883d9;}.j-null{color:#f87171;}.j-punc{color:#3d6650;}
 
 /* Code Block */
 .code-block{background:var(--bg2);border:1px solid var(--border2);margin-top:10px;overflow:hidden;}
@@ -200,9 +207,11 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 /* Footer */
 hr.sep{border:none;border-top:1px solid var(--border2);max-width:1000px;margin:0 auto;}
 footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20px;}
-.footer-inner{max-width:1000px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.footer-inner{max-width:1000px;margin:0 auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
 .footer-brand{font-family:var(--ff-disp);font-size:20px;color:var(--fg);letter-spacing:2px;}
 .footer-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);}
+.footer-copy a{color:var(--primary);text-decoration:none;}
+.footer-copy a:hover{text-decoration:underline;}
 
 /* No Results */
 #noResults{display:none;text-align:center;padding:48px 24px;}
@@ -218,6 +227,21 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
   <div class="loader-ring"></div>
   <div class="loader-text">loading</div>
 </div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <span class="logo-dot"></span>
+      <span id="hdr-title">BASE-SIMPLE</span>
+      <span class="logo-badge">API</span>
+    </a>
+    <div class="nav-row">
+      <a class="nav-pill" href="https://github.com/izuku-mii/Base-Api" target="_blank">Base Script Api</a>
+      <a class="nav-pill" id="hdr-author" href="https://github.com/izuku-mii" target="_blank">@oota_asik_sendiri</a>
+    </div>
+  </div>
+</header>
 
 <aside id="sidebar">
   <div class="sidebar-header">
@@ -239,18 +263,18 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
 <div class="main-content">
   <div class="main-wrap">
     
-    <div class="header-top">
-      <button id="sidebarToggle" class="material-icons">menu</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+      <button id="menuToggle" class="material-icons">menu</button>
       <div></div>
     </div>
 
     <!-- BANNER -->
-    <div class="banner-wrap a1">
+    <div class="banner-wrap">
       <img src="./assets/banner.jpg" alt="Banner" onerror="this.style.display='none'"/>
     </div>
 
     <!-- Terminal Search -->
-    <div class="terminal-box a2">
+    <div class="terminal-box">
       <div class="terminal-bar">
         <div class="terminal-dot"></div>
         <div class="terminal-dot"></div>
@@ -277,9 +301,10 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand" id="footer-name">BASE-SIMPLE</div>
-      <div class="footer-copy">© <span id="yr"></span> <span id="footer-author">@oota_asik_sendiri</span></div>
+      <div class="footer-brand">BASE-SIMPLE</div>
+      <div class="footer-copy">© 2026 @oota_asik_sendiri</div>
     </div>
+    <div class="footer-copy">web html: <a href="https://rynekoo-api.hf.space/" target="_blank">https://rynekoo-api.hf.space/</a></div>
     <div class="footer-copy">REST API · express.js</div>
   </div>
 </footer>
@@ -290,28 +315,26 @@ let categoriesMap = new Map();
 let currentCategory = 'all';
 let currentResponse = null;
 
-// Status codes table HTML
-const statusCodesHTML = `
-<div class="status-table-card">
-  <div class="status-table-header-card">
-    <span>📋 HTTP Status Codes</span>
-  </div>
-  <table>
-    <thead><tr><th>Code</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr><td><span class="material-icons status-icon ok" style="font-size:12px;">check_circle</span> 200</td><td>OK - Request successful</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 400</td><td>Bad Request - Invalid parameters or missing required fields</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 401</td><td>Unauthorized - Missing or invalid API key</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 403</td><td>Forbidden - You do not have permission to access this resource</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 404</td><td>Not Found - The requested resource could not be found</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 405</td><td>Method Not Allowed - HTTP method not supported for this resource</td></tr>
-      <tr><td><span class="material-icons status-icon warning" style="font-size:12px;">warning</span> 429</td><td>Too Many Requests - You have hit the rate limit</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 500</td><td>Internal Server Error - Something went wrong on our end</td></tr>
-      <tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 503</td><td>Service Unavailable - The server is temporarily unavailable</td></tr>
-    </tbody>
-  </table>
-</div>
-`;
+function tokenizeJSON(v, d) {
+  d = d || 0;
+  if (v === null) return '<span class="j-null">null</span>';
+  if (typeof v === 'boolean') return '<span class="j-bool">' + v + '</span>';
+  if (typeof v === 'number') return '<span class="j-num">' + v + '</span>';
+  if (typeof v === 'string') return '<span class="j-str">"' + esc(v) + '"</span>';
+  if (Array.isArray(v)) {
+    if (!v.length) return '<span class="j-punc">[]</span>';
+    const ind = '  '.repeat(d + 1);
+    const items = v.map(function(x) { return ind + tokenizeJSON(x, d + 1); });
+    return '<span class="j-punc">[</span>\n' + items.join('<span class="j-punc">,</span>\n') + '\n' + '  '.repeat(d) + '<span class="j-punc">]</span>';
+  }
+  const keys = Object.keys(v);
+  if (!keys.length) return '<span class="j-punc">{}</span>';
+  const ind = '  '.repeat(d + 1);
+  const items = keys.map(function(k) {
+    return ind + '<span class="j-key">"' + esc(k) + '"</span><span class="j-punc">: </span>' + tokenizeJSON(v[k], d + 1);
+  });
+  return '<span class="j-punc">{</span>\n' + items.join('<span class="j-punc">,</span>\n') + '\n' + '  '.repeat(d) + '<span class="j-punc">}</span>';
+}
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -323,11 +346,8 @@ function extractParamsFromPath(path) {
     const pairs = queryString.split('&');
     pairs.forEach(pair => {
       const eqIndex = pair.indexOf('=');
-      if (eqIndex !== -1) {
-        params.push(pair.slice(0, eqIndex));
-      } else if (pair) {
-        params.push(pair);
-      }
+      if (eqIndex !== -1) params.push(pair.slice(0, eqIndex));
+      else if (pair) params.push(pair);
     });
   }
   return params;
@@ -336,77 +356,50 @@ function extractParamsFromPath(path) {
 function convertEndpointData(rawData) {
   const result = [];
   categoriesMap.clear();
-  
   const categories = rawData.endpoints || rawData;
   
   categories.forEach(cat => {
     const categoryName = cat.name || "Uncategorized";
-    if (!categoriesMap.has(categoryName)) {
-      categoriesMap.set(categoryName, []);
-    }
-    
+    if (!categoriesMap.has(categoryName)) categoriesMap.set(categoryName, []);
     if (cat.items && cat.items.length) {
       cat.items.forEach(item => {
         const isPost = item.post === true;
         const paramsFromPath = extractParamsFromPath(item.path);
         const hasFileUpload = item.paramsFile && item.paramsFile.length;
-        
         let parameters = { required: [], optional: [] };
-        
         if (item.params && item.params.length) {
           item.params.forEach(p => {
             const paramName = p.replace(/=$/, '');
-            parameters.required.push({
-              name: paramName,
-              description: item.desc || `Enter ${paramName}`,
-              example: `your_${paramName}_here`
-            });
+            parameters.required.push({ name: paramName, description: item.desc || `Enter ${paramName}`, example: `your_${paramName}_here` });
           });
         } else if (paramsFromPath.length) {
           paramsFromPath.forEach(paramName => {
-            parameters.required.push({
-              name: paramName,
-              description: item.desc || `Enter ${paramName}`,
-              example: `your_${paramName}_here`
-            });
+            parameters.required.push({ name: paramName, description: item.desc || `Enter ${paramName}`, example: `your_${paramName}_here` });
           });
         }
-        
         let alias = item.path.split('?')[0].split('/').pop();
         if (alias === 'v1' || alias === 'v2' || alias === 'v3') {
           const parent = item.path.split('/').slice(-2, -1)[0];
           alias = parent ? `${parent} ${alias}` : alias;
         }
         alias = alias.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        
         const endpointObj = {
-          id: result.length,
-          alias: alias,
-          method: isPost ? "POST" : "GET",
-          methods: [isPost ? "POST" : "GET"],
-          path: item.path.split('?')[0],
-          category: categoryName,
-          tags: [categoryName, isPost ? "Upload" : "Download"],
-          parameters: parameters,
-          hasFileUpload: hasFileUpload,
-          originalDesc: item.desc,
-          rawPath: item.path
+          id: result.length, alias: alias, method: isPost ? "POST" : "GET",
+          methods: [isPost ? "POST" : "GET"], path: item.path.split('?')[0],
+          category: categoryName, tags: [categoryName, isPost ? "Upload" : "Download"],
+          parameters: parameters, hasFileUpload: hasFileUpload, originalDesc: item.desc, rawPath: item.path
         };
-        
         result.push(endpointObj);
         categoriesMap.get(categoryName).push(endpointObj);
       });
     }
   });
-  
   return result;
 }
 
 function renderSidebarCategories() {
   const container = document.getElementById('category-list');
-  const allCount = endpointsDataGlobal.length;
-  document.getElementById('count-all').textContent = allCount;
-  
+  document.getElementById('count-all').textContent = endpointsDataGlobal.length;
   let html = '';
   for (let [catName, items] of categoriesMap) {
     if (catName !== "Uncategorized") {
@@ -414,25 +407,14 @@ function renderSidebarCategories() {
     }
   }
   container.innerHTML = html;
-  
-  // Add click handlers for category links
   document.querySelectorAll('#sidebar-nav a[data-category]').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const category = link.getAttribute('data-category');
-      currentCategory = category;
-      
-      // Update active state
+      currentCategory = link.getAttribute('data-category');
       document.querySelectorAll('#sidebar-nav a').forEach(a => a.classList.remove('active'));
       link.classList.add('active');
-      
-      // Filter and render endpoints
-      if (category === 'all') {
-        renderEndpoints('');
-      } else {
-        const filtered = endpointsDataGlobal.filter(ep => ep.category === category);
-        renderFilteredEndpoints(filtered);
-      }
+      if (currentCategory === 'all') renderEndpoints('');
+      else renderFilteredEndpoints(endpointsDataGlobal.filter(ep => ep.category === currentCategory));
     });
   });
 }
@@ -440,322 +422,133 @@ function renderSidebarCategories() {
 function renderFilteredEndpoints(endpoints) {
   const container = document.getElementById('ep-list');
   const noResults = document.getElementById('noResults');
-  
-  if (endpoints.length === 0) {
-    container.innerHTML = '';
-    noResults.style.display = 'block';
-    return;
-  }
-  
+  if (endpoints.length === 0) { container.innerHTML = ''; noResults.style.display = 'block'; return; }
   noResults.style.display = 'none';
-  container.innerHTML = endpoints.map((ep, idx) => `
-    <div class="card a${(idx % 3) + 1}">
+  container.innerHTML = endpoints.map(ep => `
+    <div class="card">
       <div class="card-header" onclick="toggleCard(${ep.id})">
         <div class="card-header-left">
           <span class="material-icons" id="card-icon-${ep.id}">expand_more</span>
-          <div>
-            <h3>${esc(ep.alias)}</h3>
-            <div class="tags">${ep.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-          </div>
+          <div><h3>${esc(ep.alias)}</h3><div class="tags">${ep.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <span class="badge-method ${ep.method === 'GET' ? 'badge-get' : 'badge-post'}">${ep.method}</span>
-          <span class="material-icons menu-dots" onclick="event.stopPropagation();showEndpointMenu(${ep.id})">more_vert</span>
+          <span class="material-icons menu-dots" onclick="event.stopPropagation();showEndpointMenu('${ep.path}')">more_vert</span>
         </div>
       </div>
       <div class="card-body" id="card-body-${ep.id}">
-        <div class="tab-container">
-          ${ep.methods.map(m => `<button class="tab-btn ${m === ep.method ? 'active' : ''}" onclick="switchMethod(${ep.id}, '${m}')">${m}</button>`).join('')}
-        </div>
+        <div class="tab-container">${ep.methods.map(m => `<button class="tab-btn ${m === ep.method ? 'active' : ''}" onclick="switchMethod(${ep.id}, '${m}')">${m}</button>`).join('')}</div>
         <div id="method-content-${ep.id}" class="method-content active">
-          ${ep.parameters?.required?.map(p => `
-            <div class="param-group">
-              <label>${esc(p.name)}</label>
-              <input type="text" name="${esc(p.name)}" placeholder="${esc(p.example || '')}" value="${esc(p.example || '')}" oninput="updateCurl(${ep.id})">
-              <div class="desc">${esc(p.description || '')}</div>
-            </div>
-          `).join('')}
-          ${ep.hasFileUpload ? `
-            <div class="param-group">
-              <label>File Upload</label>
-              <input type="file" name="file" onchange="updateCurl(${ep.id})">
-              <div class="desc">Upload image/file for processing</div>
-            </div>
-          ` : ''}
+          ${ep.parameters?.required?.map(p => `<div class="param-group"><label>${esc(p.name)}</label><input type="text" name="${esc(p.name)}" placeholder="${esc(p.example || '')}" value="${esc(p.example || '')}" oninput="updateCurl(${ep.id})"><div class="desc">${esc(p.description || '')}</div></div>`).join('')}
+          ${ep.hasFileUpload ? `<div class="param-group"><label>File Upload</label><input type="file" name="file" onchange="updateCurl(${ep.id})"><div class="desc">Upload image/file for processing</div></div>` : ''}
         </div>
-        <div class="button-group">
-          <button class="btn-execute" onclick="executeRequest(${ep.id})"><span class="material-icons" style="font-size:10px;">play_arrow</span> EXECUTE</button>
-          <button class="btn-execute" style="background:var(--card2);color:var(--fg2);" onclick="clearResponse(${ep.id})"><span class="material-icons" style="font-size:10px;">clear</span> CLEAR</button>
-        </div>
-        <div class="response-section" id="response-${ep.id}" style="display:none;">
-          <div class="response-header">
-            <span class="response-status ok" id="resp-status-${ep.id}">200 OK</span>
-            <span class="response-timing" id="resp-time-${ep.id}">—ms</span>
-            <button class="response-copy" onclick="copyResponse(${ep.id})">Copy</button>
-          </div>
-          <div class="response-box">
-            <div class="response-box-header">Response</div>
-            <div class="response-content" id="resp-content-${ep.id}"><pre>Send a request...</pre></div>
-          </div>
-        </div>
-        <div class="code-block">
-          <div class="code-header">
-            <span>cURL</span>
-            <button class="code-copy" onclick="copyCurl(${ep.id})">copy</button>
-          </div>
-          <div class="code-pre" id="curl-pre-${ep.id}">curl -X GET "${window.location.origin}${ep.path}"</div>
-        </div>
+        <div class="button-group"><button class="btn-execute" onclick="executeRequest(${ep.id})"><span class="material-icons" style="font-size:10px;">play_arrow</span> EXECUTE</button><button class="btn-execute" style="background:var(--card2);color:var(--fg2);" onclick="clearResponse(${ep.id})"><span class="material-icons" style="font-size:10px;">clear</span> CLEAR</button></div>
+        <div class="response-section" id="response-${ep.id}" style="display:none;"><div class="response-header"><span class="response-status ok" id="resp-status-${ep.id}">200 OK</span><span class="response-timing" id="resp-time-${ep.id}">—ms</span><button class="response-copy" onclick="copyResponse(${ep.id})">Copy</button></div><div class="response-box"><div class="response-box-header">Response</div><div class="response-content" id="resp-content-${ep.id}"><pre>Send a request...</pre></div></div></div>
+        <div class="code-block"><div class="code-header"><span>cURL</span><button class="code-copy" onclick="copyCurl(${ep.id})">copy</button></div><div class="code-pre" id="curl-pre-${ep.id}">curl -X GET "${window.location.origin}${ep.path}"</div></div>
         ${statusCodesHTML}
       </div>
     </div>
   `).join('');
-  
   endpointsDataGlobal.forEach(ep => updateCurl(ep.id));
 }
+
+const statusCodesHTML = `<div class="status-table-card"><div class="status-table-header-card"><span>📋 HTTP Status Codes</span></div><table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td><span class="material-icons status-icon ok" style="font-size:12px;">check_circle</span> 200</td><td>OK - Request successful</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 400</td><td>Bad Request - Invalid parameters or missing required fields</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 401</td><td>Unauthorized - Missing or invalid API key</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 403</td><td>Forbidden - You do not have permission to access this resource</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 404</td><td>Not Found - The requested resource could not be found</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 405</td><td>Method Not Allowed - HTTP method not supported for this resource</td></tr><tr><td><span class="material-icons status-icon warning" style="font-size:12px;">warning</span> 429</td><td>Too Many Requests - You have hit the rate limit</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 500</td><td>Internal Server Error - Something went wrong on our end</td></tr><tr><td><span class="material-icons status-icon err" style="font-size:12px;">error</span> 503</td><td>Service Unavailable - The server is temporarily unavailable</td></tr></tbody></table></div>`;
 
 function renderEndpoints(filter = '') {
   const searchTerm = filter.toLowerCase();
   let filtered = endpointsDataGlobal;
-  
-  if (searchTerm) {
-    filtered = endpointsDataGlobal.filter(ep => 
-      ep.alias.toLowerCase().includes(searchTerm) || 
-      ep.path.toLowerCase().includes(searchTerm) ||
-      ep.tags.some(t => t.toLowerCase().includes(searchTerm))
-    );
-  }
-  
-  if (currentCategory !== 'all') {
-    filtered = filtered.filter(ep => ep.category === currentCategory);
-  }
-  
+  if (searchTerm) filtered = endpointsDataGlobal.filter(ep => ep.alias.toLowerCase().includes(searchTerm) || ep.path.toLowerCase().includes(searchTerm) || ep.tags.some(t => t.toLowerCase().includes(searchTerm)));
+  if (currentCategory !== 'all') filtered = filtered.filter(ep => ep.category === currentCategory);
   renderFilteredEndpoints(filtered);
 }
 
-function showEndpointMenu(endpointId) {
-  const ep = endpointsDataGlobal.find(e => e.id === endpointId);
-  if (!ep) return;
-  
-  const menuHtml = `
-    <div style="position:fixed;background:var(--card2);border:1px solid var(--border2);border-radius:4px;z-index:200;min-width:150px;" id="temp-menu">
-      <div style="padding:8px 12px;font-family:var(--ff-mono);font-size:10px;color:var(--fg3);border-bottom:1px solid var(--border2);">${esc(ep.alias)}</div>
-      <div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="copyEndpointLink('${ep.path}');removeMenu()">🔗 Copy Link</div>
-      <div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="copyFullUrl('${ep.path}');removeMenu()">📋 Copy Full URL</div>
-      <div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="removeMenu()">✖ Close</div>
-    </div>
-  `;
-  
+function showEndpointMenu(path) {
   removeMenu();
   const div = document.createElement('div');
-  div.innerHTML = menuHtml;
+  div.innerHTML = `<div id="temp-menu" style="position:fixed;background:var(--card2);border:1px solid var(--border2);z-index:200;min-width:150px;"><div style="padding:8px 12px;font-family:var(--ff-mono);font-size:10px;color:var(--fg3);border-bottom:1px solid var(--border2);">Options</div><div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="copyEndpointLink('${path}');removeMenu()">🔗 Copy Link</div><div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="copyFullUrl('${path}');removeMenu()">📋 Copy Full URL</div><div style="padding:8px 12px;cursor:pointer;color:var(--fg2);" onclick="removeMenu()">✖ Close</div></div>`;
   document.body.appendChild(div.firstChild);
-  
   const menu = document.getElementById('temp-menu');
-  if (menu) {
-    menu.style.top = (window.event?.clientY || 100) + 'px';
-    menu.style.left = (window.event?.clientX || 100) + 'px';
-    
-    setTimeout(() => {
-      document.addEventListener('click', function removeHandler(e) {
-        if (!menu.contains(e.target)) {
-          removeMenu();
-          document.removeEventListener('click', removeHandler);
-        }
-      });
-    }, 100);
-  }
+  if (menu) { menu.style.top = (window.event?.clientY || 100) + 'px'; menu.style.left = (window.event?.clientX || 100) + 'px'; }
+  setTimeout(() => { document.addEventListener('click', function removeHandler(e) { if (menu && !menu.contains(e.target)) { removeMenu(); document.removeEventListener('click', removeHandler); } }); }, 100);
 }
 
-function removeMenu() {
-  const existing = document.getElementById('temp-menu');
-  if (existing) existing.remove();
-}
-
-function copyEndpointLink(path) {
-  const url = window.location.origin + path;
-  navigator.clipboard.writeText(url);
-}
-
-function copyFullUrl(path) {
-  const url = window.location.origin + path;
-  navigator.clipboard.writeText(url);
-}
-
-function toggleCard(idx) {
-  const body = document.getElementById(`card-body-${idx}`);
-  const icon = document.getElementById(`card-icon-${idx}`);
-  if (body.style.display === 'none' || !body.style.display) {
-    body.style.display = 'block';
-    icon.classList.remove('rotated');
-  } else {
-    body.style.display = 'none';
-    icon.classList.add('rotated');
-  }
-}
-
-function switchMethod(idx, method) {
-  updateCurl(idx);
-}
-
+function removeMenu() { const existing = document.getElementById('temp-menu'); if (existing) existing.remove(); }
+function copyEndpointLink(path) { navigator.clipboard.writeText(window.location.origin + path); }
+function copyFullUrl(path) { navigator.clipboard.writeText(window.location.origin + path); }
+function toggleCard(idx) { const body = document.getElementById(`card-body-${idx}`); const icon = document.getElementById(`card-icon-${idx}`); if (body.style.display === 'none' || !body.style.display) { body.style.display = 'block'; icon.classList.remove('rotated'); } else { body.style.display = 'none'; icon.classList.add('rotated'); } }
+function switchMethod(idx, method) { updateCurl(idx); }
 function buildCurl(idx) {
-  const ep = endpointsDataGlobal.find(e => e.id === idx);
-  if (!ep) return '';
-  const method = ep.method;
+  const ep = endpointsDataGlobal.find(e => e.id === idx); if (!ep) return '';
   let url = window.location.origin + ep.path;
-  const params = [];
-  
-  if (method === 'GET') {
-    const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
-    inputs.forEach(input => {
-      if (input.value) params.push(`${encodeURIComponent(input.name)}=${encodeURIComponent(input.value)}`);
-    });
+  if (ep.method === 'GET') {
+    const params = []; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) params.push(`${encodeURIComponent(i.name)}=${encodeURIComponent(i.value)}`); });
     if (params.length) url += '?' + params.join('&');
     return `curl -X GET "${url}"`;
   } else {
-    const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
-    const bodyObj = {};
-    inputs.forEach(input => { if (input.value) bodyObj[input.name] = input.value; });
+    const bodyObj = {}; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) bodyObj[i.name] = i.value; });
     const fileInput = document.querySelector(`#card-body-${idx} input[type="file"]`);
-    
-    if (fileInput && fileInput.files && fileInput.files[0]) {
-      return `curl -X POST "${url}" \\\n  -F "image=@${fileInput.files[0].name}"`;
-    } else if (Object.keys(bodyObj).length) {
-      return `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(bodyObj)}'`;
-    } else {
-      return `curl -X POST "${url}"`;
-    }
+    if (fileInput && fileInput.files && fileInput.files[0]) return `curl -X POST "${url}" \\\n  -F "image=@${fileInput.files[0].name}"`;
+    else if (Object.keys(bodyObj).length) return `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(bodyObj)}'`;
+    else return `curl -X POST "${url}"`;
   }
 }
-
-function updateCurl(idx) {
-  const el = document.getElementById(`curl-pre-${idx}`);
-  if (el) el.textContent = buildCurl(idx);
-}
-
-function copyCurl(idx) {
-  const el = document.getElementById(`curl-pre-${idx}`);
-  if (el) {
-    navigator.clipboard.writeText(el.textContent);
-    const btn = el.parentElement.querySelector('.code-copy');
-    const orig = btn.textContent;
-    btn.textContent = '✓';
-    setTimeout(() => btn.textContent = orig, 1500);
-  }
-}
-
-function copyResponse(idx) {
-  if (currentResponse) {
-    navigator.clipboard.writeText(JSON.stringify(currentResponse, null, 2));
-    const btn = document.querySelector(`#response-${idx} .response-copy`);
-    const orig = btn.textContent;
-    btn.textContent = '✓';
-    setTimeout(() => btn.textContent = orig, 1500);
-  }
-}
-
-function clearResponse(idx) {
-  const sec = document.getElementById(`response-${idx}`);
-  if (sec) sec.style.display = 'none';
-  currentResponse = null;
-}
-
-function isImageResponse(contentType, data) {
-  return contentType && contentType.includes('image/');
-}
-
-function displayMedia(contentEl, contentType, data, url) {
-  if (contentType.includes('image/')) {
-    contentEl.innerHTML = `<img src="${url}" alt="Response Image" style="max-width:100%;border-radius:4px;"/>`;
-  } else if (contentType.includes('video/')) {
-    contentEl.innerHTML = `<video controls style="max-width:100%;border-radius:4px;"><source src="${url}" type="${contentType}"></video>`;
-  } else if (contentType.includes('audio/')) {
-    contentEl.innerHTML = `<audio controls style="width:100%;"><source src="${url}" type="${contentType}"></audio>`;
-  } else if (contentType.includes('application/pdf')) {
-    contentEl.innerHTML = `<iframe src="${url}" style="width:100%;height:300px;border:none;"></iframe>`;
-  } else {
-    contentEl.innerHTML = `<pre>${esc(typeof data === 'object' ? JSON.stringify(data, null, 2) : data)}</pre>`;
-  }
-}
+function updateCurl(idx) { const el = document.getElementById(`curl-pre-${idx}`); if (el) el.textContent = buildCurl(idx); }
+function copyCurl(idx) { const el = document.getElementById(`curl-pre-${idx}`); if (el) { navigator.clipboard.writeText(el.textContent); const btn = el.parentElement.querySelector('.code-copy'); const orig = btn.textContent; btn.textContent = '✓'; setTimeout(() => btn.textContent = orig, 1500); } }
+function copyResponse(idx) { if (currentResponse) { navigator.clipboard.writeText(JSON.stringify(currentResponse, null, 2)); const btn = document.querySelector(`#response-${idx} .response-copy`); const orig = btn.textContent; btn.textContent = '✓'; setTimeout(() => btn.textContent = orig, 1500); } }
+function clearResponse(idx) { const sec = document.getElementById(`response-${idx}`); if (sec) sec.style.display = 'none'; currentResponse = null; }
 
 async function executeRequest(idx) {
-  const ep = endpointsDataGlobal.find(e => e.id === idx);
-  if (!ep) return;
-  const method = ep.method;
+  const ep = endpointsDataGlobal.find(e => e.id === idx); if (!ep) return;
   let url = window.location.origin + ep.path;
   const start = Date.now();
-  
-  const sec = document.getElementById(`response-${idx}`);
-  const cont = document.getElementById(`resp-content-${idx}`);
-  const stat = document.getElementById(`resp-status-${idx}`);
-  const tim = document.getElementById(`resp-time-${idx}`);
-  
-  cont.innerHTML = '<pre>Loading...</pre>';
-  sec.style.display = 'block';
-  
+  const sec = document.getElementById(`response-${idx}`), cont = document.getElementById(`resp-content-${idx}`), stat = document.getElementById(`resp-status-${idx}`), tim = document.getElementById(`resp-time-${idx}`);
+  cont.innerHTML = '<pre>Loading...</pre>'; sec.style.display = 'block';
   try {
     let response;
-    if (method === 'GET') {
-      const params = [];
-      const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
-      inputs.forEach(input => {
-        if (input.value) params.push(`${encodeURIComponent(input.name)}=${encodeURIComponent(input.value)}`);
-      });
+    if (ep.method === 'GET') {
+      const params = []; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) params.push(`${encodeURIComponent(i.name)}=${encodeURIComponent(i.value)}`); });
       if (params.length) url += '?' + params.join('&');
       response = await fetch(url);
     } else {
       const fileInput = document.querySelector(`#card-body-${idx} input[type="file"]`);
       if (fileInput && fileInput.files && fileInput.files[0]) {
-        const formData = new FormData();
-        formData.append('image', fileInput.files[0]);
-        response = await fetch(url, { method: 'POST', body: formData });
+        const fd = new FormData(); fd.append('image', fileInput.files[0]);
+        response = await fetch(url, { method: 'POST', body: fd });
       } else {
-        const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
-        const bodyObj = {};
-        inputs.forEach(input => { if (input.value) bodyObj[input.name] = input.value; });
-        response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: Object.keys(bodyObj).length ? JSON.stringify(bodyObj) : undefined
-        });
+        const bodyObj = {}; document.querySelectorAll(`#card-body-${idx} input[type="text"]`).forEach(i => { if (i.value) bodyObj[i.name] = i.value; });
+        response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: Object.keys(bodyObj).length ? JSON.stringify(bodyObj) : undefined });
       }
     }
-    
     const ms = Date.now() - start;
     const isOk = response.ok;
-    const contentType = response.headers.get('content-type');
-    
-    let data;
-    if (contentType && (contentType.includes('image/') || contentType.includes('video/') || contentType.includes('audio/') || contentType.includes('application/pdf'))) {
-      const blob = await response.blob();
-      const objectUrl = URL.createObjectURL(blob);
-      currentResponse = { media: true, type: contentType, url: objectUrl };
-      displayMedia(cont, contentType, null, objectUrl);
-    } else if (contentType && contentType.includes('application/json')) {
-      data = await response.json();
-      currentResponse = data;
-      cont.innerHTML = `<pre>${esc(JSON.stringify(data, null, 2))}</pre>`;
+    const ct = response.headers.get('content-type');
+    if (ct && (ct.includes('image/') || ct.includes('video/') || ct.includes('audio/') || ct.includes('application/pdf'))) {
+      const blob = await response.blob(); const objUrl = URL.createObjectURL(blob);
+      currentResponse = { media: true, type: ct, url: objUrl };
+      if (ct.includes('image/')) cont.innerHTML = `<img src="${objUrl}" style="max-width:100%;border-radius:4px;"/>`;
+      else if (ct.includes('video/')) cont.innerHTML = `<video controls style="max-width:100%;border-radius:4px;"><source src="${objUrl}" type="${ct}"></video>`;
+      else if (ct.includes('audio/')) cont.innerHTML = `<audio controls style="width:100%;"><source src="${objUrl}" type="${ct}"></audio>`;
+      else cont.innerHTML = `<iframe src="${objUrl}" style="width:100%;height:300px;border:none;"></iframe>`;
+    } else if (ct && ct.includes('application/json')) {
+      const data = await response.json(); currentResponse = data;
+      const coloredJSON = tokenizeJSON(data, 0);
+      cont.innerHTML = `<pre style="margin:0;white-space:pre-wrap;">${coloredJSON}</pre>`;
     } else {
-      data = await response.text();
-      currentResponse = data;
+      const data = await response.text(); currentResponse = data;
       cont.innerHTML = `<pre>${esc(data)}</pre>`;
     }
-    
     stat.textContent = `${response.status} ${response.statusText}`;
     stat.className = `response-status ${isOk ? 'ok' : 'err'}`;
     tim.textContent = `${ms}ms`;
-    
     updateCurl(idx);
   } catch (error) {
-    stat.textContent = '500 Error';
-    stat.className = 'response-status err';
+    stat.textContent = '500 Error'; stat.className = 'response-status err';
     tim.textContent = `${Date.now() - start}ms`;
     cont.innerHTML = `<pre>Error: ${esc(error.message)}</pre>`;
   }
 }
 
-function setupSearch() {
-  document.getElementById('searchInput')?.addEventListener('input', (e) => renderEndpoints(e.target.value));
-}
+function setupSearch() { document.getElementById('searchInput')?.addEventListener('input', (e) => renderEndpoints(e.target.value)); }
 
 async function loadEndpoints() {
   try {
@@ -767,52 +560,21 @@ async function loadEndpoints() {
     renderEndpoints('');
   } catch (error) {
     console.error('Gagal load /endpoint:', error);
-    const container = document.getElementById('ep-list');
-    if (container) {
-      container.innerHTML = `<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)"><div>❌ Gagal memuat endpoint</div><div style="font-size:11px;margin-top:12px;">${esc(error.message)}</div><div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div></div>`;
-    }
+    document.getElementById('ep-list').innerHTML = `<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)"><div>❌ Gagal memuat endpoint</div><div style="font-size:11px;margin-top:12px;">${esc(error.message)}</div><div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div></div>`;
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadEndpoints();
-  setupSearch();
-  document.getElementById('yr').textContent = new Date().getFullYear();
-  
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  const toggleBtn = document.getElementById('sidebarToggle');
-  
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.add('open');
-      overlay.classList.add('show');
-    });
-  }
-  if (overlay) {
-    overlay.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      overlay.classList.remove('show');
-    });
-  }
-  
-  setTimeout(() => {
-    const loader = document.getElementById('loader');
-    if (loader) loader.classList.add('out');
-  }, 500);
+  loadEndpoints(); setupSearch();
+  const sidebar = document.getElementById('sidebar'), overlay = document.getElementById('overlay'), menuToggle = document.getElementById('menuToggle');
+  if (menuToggle) menuToggle.addEventListener('click', () => { sidebar.classList.add('open'); overlay.classList.add('show'); });
+  if (overlay) overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('show'); });
+  setTimeout(() => { const loader = document.getElementById('loader'); if (loader) loader.classList.add('out'); }, 500);
 });
 
-window.toggleCard = toggleCard;
-window.switchMethod = switchMethod;
-window.executeRequest = executeRequest;
-window.clearResponse = clearResponse;
-window.updateCurl = updateCurl;
-window.copyCurl = copyCurl;
-window.copyResponse = copyResponse;
-window.showEndpointMenu = showEndpointMenu;
-window.copyEndpointLink = copyEndpointLink;
-window.copyFullUrl = copyFullUrl;
-window.removeMenu = removeMenu;
+window.toggleCard = toggleCard; window.switchMethod = switchMethod; window.executeRequest = executeRequest; window.clearResponse = clearResponse;
+window.updateCurl = updateCurl; window.copyCurl = copyCurl; window.copyResponse = copyResponse; window.showEndpointMenu = showEndpointMenu;
+window.copyEndpointLink = copyEndpointLink; window.copyFullUrl = copyFullUrl; window.removeMenu = removeMenu;
 </script>
 </body>
 </html>
