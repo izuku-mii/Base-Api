@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BASE-SIMPLE — Downloader API</title>
+<title>BASE-SIMPLE — API</title>
 
 <!-- Favicon -->
 <link rel="icon" type="image/jpeg" href="/assets/icon.jpg"/>
 <link rel="apple-touch-icon" href="/assets/icon-bg.jpg"/>
 
 <!-- Meta Tags -->
-<meta name="description" content="API Downloader services supporting various platforms including YouTube, TikTok, Instagram, and more."/>
+<meta name="description" content="API services supporting various platforms including YouTube, TikTok, Instagram, and more."/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="BASE-SIMPLE — Downloader API"/>
-<meta property="og:description" content="API Downloader services supporting various platforms including YouTube, TikTok, Instagram, and more."/>
+<meta property="og:title" content="BASE-SIMPLE — API"/>
+<meta property="og:description" content="API services supporting various platforms including YouTube, TikTok, Instagram, and more."/>
 <meta property="og:image" content="/assets/banner.jpg"/>
 <meta property="og:image:width" content="1280"/>
 <meta property="og:image:height" content="720"/>
@@ -31,7 +31,7 @@
 :root {
   --bg:#071510;--bg2:#0a1c16;--card:#0d2118;--card2:#102a1e;
   --fg:#c8ddd5;--fg2:#7aaa90;--fg3:#3d6650;
-  --primary:#2dbd7e;--primary2:#1a9962;--accent:#2dbd7e;--red:#f87171;
+  --primary:#2dbd7e;--primary2:#1a9962;--accent:#2dbd7e;--red:#f87171;--yellow:#fbbf24;
   --border:rgba(45,189,126,0.08);--border2:rgba(45,189,126,0.16);
   --glow:0 0 40px rgba(45,189,126,0.18);--shadow:0 8px 32px rgba(0,0,0,0.5);
   --r:0px;
@@ -105,7 +105,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 
 /* Header Top */
 .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
-#sidebarToggle{background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;cursor:pointer;color:var(--fg);font-family:var(--ff-mono);font-size:12px;}
+#sidebarToggle{background:var(--card);border:1px solid var(--border2);padding:8px 12px;cursor:pointer;color:var(--fg);font-family:var(--ff-mono);font-size:12px;}
 
 /* Banner */
 .banner-wrap{border:1px solid var(--border2);margin-bottom:24px;background:var(--card);}
@@ -123,67 +123,75 @@ body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);-webkit-fon
 .terminal-input input{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font-family:var(--ff-mono);font-size:12px;}
 .terminal-input input::placeholder{color:var(--fg3);}
 
-/* Card - KOTAK PERSEGI (border-radius:0) */
-.card{background:var(--card);border:1px solid var(--border2);margin-bottom:12px;overflow:hidden;transition:all .2s;}
+/* Status Code Table */
+.status-table-wrap{border:1px solid var(--border2);overflow:hidden;margin-bottom:28px;}
+.status-table-header{background:var(--card2);padding:12px 16px;border-bottom:1px solid var(--border2);}
+.status-table-header span{font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg2);text-transform:uppercase;letter-spacing:1px;}
+.status-table{width:100%;border-collapse:collapse;}
+.status-table th,.status-table td{padding:10px 16px;text-align:left;font-family:var(--ff-mono);font-size:10px;border-bottom:1px solid var(--border2);}
+.status-table th{color:var(--fg3);font-weight:500;background:rgba(0,0,0,0.2);}
+.status-table td{color:var(--fg2);}
+.status-table tr:last-child td{border-bottom:none;}
+.status-icon{font-size:14px;vertical-align:middle;margin-right:6px;}
+.status-icon.ok{color:var(--primary);}
+.status-icon.err{color:var(--red);}
+.status-icon.warning{color:var(--yellow);}
+
+/* Card - KOTAK PERSEGI dengan ukuran kecil */
+.card{background:var(--card);border:1px solid var(--border2);margin-bottom:10px;overflow:hidden;transition:all .2s;}
 .card:hover{border-color:rgba(45,189,126,0.3);}
-.card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;background:var(--card);transition:background .2s;}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--card);transition:background .2s;}
 .card-header:hover{background:var(--card2);}
-.card-header-left{display:flex;align-items:center;gap:12px;flex:1;}
-.card-header-left .material-icons{color:var(--primary);transition:transform .2s;}
+.card-header-left{display:flex;align-items:center;gap:8px;flex:1;}
+.card-header-left .material-icons{color:var(--primary);font-size:18px;transition:transform .2s;}
 .card-header-left .material-icons.rotated{transform:rotate(180deg);}
-.card-header-left h3{font-size:15px;font-weight:500;color:var(--fg);}
-.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
-.tag{font-family:var(--ff-mono);font-size:8px;padding:3px 8px;background:var(--bg2);border:1px solid var(--border2);color:var(--fg3);letter-spacing:0.5px;}
-.badge-method{font-family:var(--ff-mono);font-size:9px;font-weight:700;padding:4px 10px;flex-shrink:0;}
+.card-header-left h3{font-size:12px;font-weight:500;color:var(--fg);}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;}
+.tag{font-family:var(--ff-mono);font-size:7px;padding:2px 6px;background:var(--bg2);border:1px solid var(--border2);color:var(--fg3);letter-spacing:0.5px;}
+.badge-method{font-family:var(--ff-mono);font-size:8px;font-weight:700;padding:3px 8px;flex-shrink:0;}
 .badge-get{background:rgba(45,189,126,0.12);color:var(--primary);border:1px solid rgba(45,189,126,0.25);}
 .badge-post{background:var(--post-bg);color:var(--post-c);border:1px solid var(--post-b);}
-.card-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border2);background:var(--card);}
+.card-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border2);background:var(--card);}
 
 /* Tab Methods */
-.tab-container{display:flex;gap:0;border-bottom:1px solid var(--border2);margin-bottom:20px;}
-.tab-btn{padding:10px 20px;font-family:var(--ff-mono);font-size:11px;font-weight:700;color:var(--fg3);background:transparent;border:none;cursor:pointer;transition:all .2s;position:relative;}
+.tab-container{display:flex;gap:0;border-bottom:1px solid var(--border2);margin-bottom:14px;}
+.tab-btn{padding:8px 14px;font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg3);background:transparent;border:none;cursor:pointer;transition:all .2s;position:relative;}
 .tab-btn.active{color:var(--primary);}
 .tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--primary);}
 .method-content{display:none;}
 .method-content.active{display:block;}
 
-/* Form Elements */
-.param-group{margin-bottom:16px;}
-.param-group label{display:block;font-family:var(--ff-mono);font-size:10px;font-weight:700;color:var(--fg2);margin-bottom:6px;text-transform:uppercase;}
-.param-group input,.param-group select,.param-group textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);padding:10px 12px;color:var(--fg);font-family:var(--ff-mono);font-size:11px;outline:none;transition:all .2s;}
+/* Form Elements - kecil */
+.param-group{margin-bottom:10px;}
+.param-group label{display:block;font-family:var(--ff-mono);font-size:8px;font-weight:700;color:var(--fg2);margin-bottom:3px;text-transform:uppercase;}
+.param-group input,.param-group select,.param-group textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);padding:7px 9px;color:var(--fg);font-family:var(--ff-mono);font-size:9px;outline:none;transition:all .2s;}
 .param-group input:focus,.param-group select:focus,.param-group textarea:focus{border-color:var(--primary);}
 .param-group input::placeholder{color:var(--fg3);}
-.param-group .desc{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);margin-top:4px;}
-.btn-execute{width:100%;background:var(--primary);border:none;padding:12px;color:#fff;font-family:var(--ff-mono);font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;}
+.param-group .desc{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);margin-top:2px;}
+.btn-execute{width:100%;background:var(--primary);border:none;padding:8px;color:#fff;font-family:var(--ff-mono);font-size:9px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px;margin-top:5px;}
 .btn-execute:hover{background:var(--primary2);box-shadow:var(--glow);}
-.btn-execute:disabled{opacity:.5;cursor:not-allowed;}
-.button-group{display:flex;gap:12px;margin-top:16px;}
+.button-group{display:flex;gap:8px;margin-top:10px;}
 .button-group button{flex:1;}
 
-/* Response Section */
-.response-section{margin-top:20px;}
-.response-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.response-status{font-family:var(--ff-mono);font-size:10px;padding:4px 12px;}
+/* Response Section - kecil */
+.response-section{margin-top:14px;}
+.response-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.response-status{font-family:var(--ff-mono);font-size:8px;padding:3px 8px;}
 .response-status.ok{background:rgba(45,189,126,0.1);color:var(--primary);border:1px solid rgba(45,189,126,0.2);}
 .response-status.err{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid rgba(248,113,113,0.2);}
-.response-timing{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:4px 10px;}
-.response-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:4px 12px;cursor:pointer;}
+.response-timing{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:3px 7px;}
+.response-copy{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:var(--bg2);border:1px solid var(--border2);padding:3px 8px;cursor:pointer;}
 .response-box{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;}
-.response-box-header{padding:10px 14px;border-bottom:1px solid var(--border2);font-family:var(--ff-mono);font-size:9px;color:var(--fg3);text-transform:uppercase;}
-.response-content{padding:14px;font-family:var(--ff-mono);font-size:11px;overflow-x:auto;max-height:300px;overflow-y:auto;}
+.response-box-header{padding:7px 10px;border-bottom:1px solid var(--border2);font-family:var(--ff-mono);font-size:7px;color:var(--fg3);text-transform:uppercase;}
+.response-content{padding:10px;font-family:var(--ff-mono);font-size:9px;overflow-x:auto;max-height:200px;overflow-y:auto;}
 .response-content pre{margin:0;white-space:pre-wrap;word-break:break-all;}
 
-/* Code Block */
-.code-block{background:var(--bg2);border:1px solid var(--border2);margin-top:16px;overflow:hidden;}
-.code-header{padding:10px 14px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
-.code-header span{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);text-transform:uppercase;}
-.code-copy{font-family:var(--ff-mono);font-size:9px;color:var(--fg3);background:none;border:none;cursor:pointer;}
-.code-pre{padding:14px;font-family:var(--ff-mono);font-size:10px;white-space:pre-wrap;overflow-x:auto;line-height:1.6;}
-
-/* Empty State */
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;}
-.empty-state .icon{font-family:var(--ff-disp);font-size:48px;color:var(--fg3);opacity:0.3;margin-bottom:12px;}
-.empty-state .text{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);}
+/* Code Block - kecil */
+.code-block{background:var(--bg2);border:1px solid var(--border2);margin-top:10px;overflow:hidden;}
+.code-header{padding:7px 10px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
+.code-header span{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);text-transform:uppercase;}
+.code-copy{font-family:var(--ff-mono);font-size:7px;color:var(--fg3);background:none;border:none;cursor:pointer;}
+.code-pre{padding:10px;font-family:var(--ff-mono);font-size:8px;white-space:pre-wrap;overflow-x:auto;line-height:1.4;}
 
 /* Footer */
 hr.sep{border:none;border-top:1px solid var(--border2);max-width:1000px;margin:0 auto;}
@@ -194,8 +202,6 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
 
 /* No Results */
 #noResults{display:none;text-align:center;padding:48px 24px;}
-#noResults .icon{font-size:48px;opacity:0.3;margin-bottom:12px;}
-#noResults .text{font-family:var(--ff-mono);font-size:10px;color:var(--fg3);}
 </style>
 </head>
 <body>
@@ -211,17 +217,15 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
 
 <aside id="sidebar">
   <div class="sidebar-header">
-    <h1>#BuildWithNeko</h1>
-    <p>Downloader API</p>
+    <h1>BASE-SIMPLE</h1>
+    <p>API</p>
   </div>
   <nav>
     <div class="nav-title">Get Started</div>
     <a href="#">Documentation</a>
     <a href="#">Contributors</a>
     <div class="nav-title" style="margin-top:16px;">Categories</div>
-    <a href="#" class="active">Downloader</a>
-    <a href="#">Random</a>
-    <a href="#">Tools</a>
+    <a href="#" class="active">All Endpoints</a>
   </nav>
   <div class="sidebar-footer">
     <span>@oota_asik_sendiri</span>
@@ -257,11 +261,34 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
       </div>
     </div>
 
+    <!-- STATUS CODE TABLE -->
+    <div class="status-table-wrap a3">
+      <div class="status-table-header">
+        <span>📋 HTTP Status Codes</span>
+      </div>
+      <table class="status-table">
+        <thead>
+          <tr><th>Code</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="material-icons status-icon ok" style="font-size:14px;">check_circle</span> 200</td><td>OK - Request successful</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 400</td><td>Bad Request - Invalid parameters or missing required fields</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 401</td><td>Unauthorized - Missing or invalid API key</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 403</td><td>Forbidden - You do not have permission to access this resource</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 404</td><td>Not Found - The requested resource could not be found</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 405</td><td>Method Not Allowed - HTTP method not supported for this resource</td></tr>
+          <tr><td><span class="material-icons status-icon warning" style="font-size:14px;">warning</span> 429</td><td>Too Many Requests - You have hit the rate limit</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 500</td><td>Internal Server Error - Something went wrong on our end</td></tr>
+          <tr><td><span class="material-icons status-icon err" style="font-size:14px;">error</span> 503</td><td>Service Unavailable - The server is temporarily unavailable</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Endpoints List -->
     <div id="ep-list"></div>
     <div id="noResults">
-      <div class="icon">⌕</div>
-      <div class="text">No endpoints found</div>
+      <div style="font-size:48px;opacity:0.3;margin-bottom:12px;">⌕</div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--fg3);">No endpoints found</div>
     </div>
 
   </div>
@@ -279,30 +306,92 @@ footer{background:var(--card);border-top:1px solid var(--border2);margin-top:20p
 </footer>
 
 <script>
-// Endpoints Data
-const endpointsData = [
-  { alias: "All In One Downloader v1", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/aio/v1", tags: ["JSON Response", "AIO", "All Platform"], body: { url: "https://instagram.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "URL from any platform", type: "string", example: "https://instagram.com/..." }], optional: [] } },
-  { alias: "All In One Downloader v2", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/aio/v2", tags: ["JSON Response", "AIO", "All Platform"], body: { url: "https://instagram.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "URL from any platform", type: "string", example: "https://instagram.com/..." }], optional: [] } },
-  { alias: "TikTok Downloader", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/tiktok", tags: ["Video Download", "Audio Download"], body: { url: "https://tiktok.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "TikTok video URL", type: "string", example: "https://tiktok.com/@user/video/123" }], optional: [] } },
-  { alias: "YouTube Downloader v1", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/youtube/v1", tags: ["Video Download", "Audio Download"], body: { url: "https://youtube.com/...", format: "mp3" }, contentType: "application/json", parameters: { required: [{ name: "url", description: "YouTube video URL", type: "string", example: "https://youtube.com/watch?v=..." }, { name: "format", description: "Format: 360,480,720,1080,mp3", type: "string", example: "mp3" }], optional: [] } },
-  { alias: "Instagram Downloader", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/instagram", tags: ["Video Download", "Image Download"], body: { url: "https://instagram.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "Instagram post/reel URL", type: "string", example: "https://instagram.com/p/..." }], optional: [] } },
-  { alias: "Facebook Downloader", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/facebook", tags: ["Video Download"], body: { url: "https://facebook.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "Facebook video URL", type: "string", example: "https://facebook.com/watch/..." }], optional: [] } },
-  { alias: "Twitter/X Downloader", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/twitter", tags: ["Video Download", "Image Download"], body: { url: "https://x.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "Twitter/X post URL", type: "string", example: "https://x.com/user/status/..." }], optional: [] } },
-  { alias: "Spotify Downloader", method: "GET/POST", methods: ["GET", "POST"], path: "/downloader/spotify/v1", tags: ["Music Download"], body: { url: "https://open.spotify.com/..." }, contentType: "application/json", parameters: { required: [{ name: "url", description: "Spotify track URL", type: "string", example: "https://open.spotify.com/track/..." }], optional: [] } }
-];
-
+let endpointsDataGlobal = [];
 let currentResponse = null;
 
-// Helper Functions
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// Render Endpoints
+function extractParamsFromPath(path) {
+  const params = [];
+  const queryStart = path.indexOf('?');
+  if (queryStart !== -1) {
+    const queryString = path.slice(queryStart + 1);
+    const pairs = queryString.split('&');
+    pairs.forEach(pair => {
+      const eqIndex = pair.indexOf('=');
+      if (eqIndex !== -1) {
+        params.push(pair.slice(0, eqIndex));
+      } else if (pair) {
+        params.push(pair);
+      }
+    });
+  }
+  return params;
+}
+
+function convertEndpointData(rawData) {
+  const result = [];
+  const categories = rawData.endpoints || rawData;
+  
+  categories.forEach(cat => {
+    if (cat.items && cat.items.length) {
+      cat.items.forEach(item => {
+        const isPost = item.post === true;
+        const paramsFromPath = extractParamsFromPath(item.path);
+        const hasFileUpload = item.paramsFile && item.paramsFile.length;
+        
+        let parameters = { required: [], optional: [] };
+        
+        if (item.params && item.params.length) {
+          item.params.forEach(p => {
+            const paramName = p.replace(/=$/, '');
+            parameters.required.push({
+              name: paramName,
+              description: item.desc || `Enter ${paramName}`,
+              example: `your_${paramName}_here`
+            });
+          });
+        } else if (paramsFromPath.length) {
+          paramsFromPath.forEach(paramName => {
+            parameters.required.push({
+              name: paramName,
+              description: item.desc || `Enter ${paramName}`,
+              example: `your_${paramName}_here`
+            });
+          });
+        }
+        
+        let alias = item.path.split('?')[0].split('/').pop();
+        if (alias === 'v1' || alias === 'v2' || alias === 'v3') {
+          const parent = item.path.split('/').slice(-2, -1)[0];
+          alias = parent ? `${parent} ${alias}` : alias;
+        }
+        alias = alias.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        
+        result.push({
+          alias: alias,
+          method: isPost ? "POST" : "GET",
+          methods: [isPost ? "POST" : "GET"],
+          path: item.path.split('?')[0],
+          tags: [cat.name, isPost ? "Upload" : "Download"],
+          parameters: parameters,
+          hasFileUpload: hasFileUpload,
+          originalDesc: item.desc,
+          rawPath: item.path
+        });
+      });
+    }
+  });
+  
+  return result;
+}
+
 function renderEndpoints(filter = '') {
   const container = document.getElementById('ep-list');
   const noResults = document.getElementById('noResults');
   const searchTerm = filter.toLowerCase();
   
-  const filtered = endpointsData.filter(ep => 
+  const filtered = endpointsDataGlobal.filter(ep => 
     ep.alias.toLowerCase().includes(searchTerm) || 
     ep.path.toLowerCase().includes(searchTerm) ||
     ep.tags.some(t => t.toLowerCase().includes(searchTerm))
@@ -316,48 +405,39 @@ function renderEndpoints(filter = '') {
   
   noResults.style.display = 'none';
   container.innerHTML = filtered.map((ep, idx) => `
-    <div class="card a${(idx % 3) + 1}" data-endpoint-idx="${idx}">
+    <div class="card a${(idx % 3) + 1}">
       <div class="card-header" onclick="toggleCard(${idx})">
         <div class="card-header-left">
           <span class="material-icons" id="card-icon-${idx}">expand_more</span>
           <div>
             <h3>${esc(ep.alias)}</h3>
-            <div class="tags">
-              ${ep.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
-            </div>
+            <div class="tags">${ep.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
           </div>
         </div>
         <span class="badge-method ${ep.method === 'GET' ? 'badge-get' : 'badge-post'}">${ep.method}</span>
       </div>
       <div class="card-body" id="card-body-${idx}">
         <div class="tab-container">
-          ${ep.methods.map(m => `<button class="tab-btn ${m === 'GET' ? 'active' : ''}" onclick="switchMethod(${idx}, '${m}')">${m}</button>`).join('')}
+          ${ep.methods.map(m => `<button class="tab-btn ${m === ep.method ? 'active' : ''}" onclick="switchMethod(${idx}, '${m}')">${m}</button>`).join('')}
         </div>
-        <div id="method-get-${idx}" class="method-content ${ep.methods.includes('GET') ? 'active' : ''}">
+        <div id="method-content-${idx}" class="method-content active">
           ${ep.parameters?.required?.map(p => `
             <div class="param-group">
-              <label>${esc(p.name)} ${p.example ? `<span style="color:var(--fg3);">(example: ${esc(p.example)})</span>` : ''}</label>
-              <input type="text" name="${esc(p.name)}" placeholder="${esc(p.description || p.name)}" value="${esc(p.example || '')}" oninput="updateCurl(${idx})">
-              ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ''}
+              <label>${esc(p.name)}</label>
+              <input type="text" name="${esc(p.name)}" placeholder="${esc(p.example || '')}" value="${esc(p.example || '')}" oninput="updateCurl(${idx})">
+              <div class="desc">${esc(p.description || '')}</div>
             </div>
           `).join('')}
-        </div>
-        <div id="method-post-${idx}" class="method-content ${!ep.methods.includes('GET') ? 'active' : ''}">
-          ${ep.parameters?.required?.map(p => `
+          ${ep.hasFileUpload ? `
             <div class="param-group">
-              <label>${esc(p.name)} ${p.example ? `<span style="color:var(--fg3);">(example: ${esc(p.example)})</span>` : ''}</label>
-              <input type="text" name="${esc(p.name)}" placeholder="${esc(p.description || p.name)}" value="${esc(p.example || '')}" oninput="updateCurl(${idx})">
-              ${p.description ? `<div class="desc">${esc(p.description)}</div>` : ''}
+              <label>File Upload</label>
+              <input type="file" name="file" onchange="updateCurl(${idx})">
             </div>
-          `).join('')}
-          <div class="param-group">
-            <label>Request Body (JSON)</label>
-            <textarea name="body" rows="4" placeholder='${ep.body ? JSON.stringify(ep.body, null, 2) : '{"key": "value"}'}' oninput="updateCurl(${idx})">${ep.body ? JSON.stringify(ep.body, null, 2) : ''}</textarea>
-          </div>
+          ` : ''}
         </div>
         <div class="button-group">
-          <button class="btn-execute" onclick="executeRequest(${idx})"><span class="material-icons" style="font-size:14px;">play_arrow</span> EXECUTE</button>
-          <button class="btn-execute" style="background:var(--card2);color:var(--fg2);" onclick="clearResponse(${idx})"><span class="material-icons" style="font-size:14px;">clear</span> CLEAR</button>
+          <button class="btn-execute" onclick="executeRequest(${idx})"><span class="material-icons" style="font-size:10px;">play_arrow</span> EXECUTE</button>
+          <button class="btn-execute" style="background:var(--card2);color:var(--fg2);" onclick="clearResponse(${idx})"><span class="material-icons" style="font-size:10px;">clear</span> CLEAR</button>
         </div>
         <div class="response-section" id="response-${idx}" style="display:none;">
           <div class="response-header">
@@ -367,14 +447,12 @@ function renderEndpoints(filter = '') {
           </div>
           <div class="response-box">
             <div class="response-box-header">Response</div>
-            <div class="response-content" id="resp-content-${idx}">
-              <pre>Send a request to see response...</pre>
-            </div>
+            <div class="response-content" id="resp-content-${idx}"><pre>Send a request...</pre></div>
           </div>
         </div>
-        <div class="code-block" id="curl-block-${idx}">
+        <div class="code-block">
           <div class="code-header">
-            <span>cURL Command</span>
+            <span>cURL</span>
             <button class="code-copy" onclick="copyCurl(${idx})">copy</button>
           </div>
           <div class="code-pre" id="curl-pre-${idx}">curl -X GET "${window.location.origin}${ep.path}"</div>
@@ -382,11 +460,9 @@ function renderEndpoints(filter = '') {
       </div>
     </div>
   `).join('');
-  
-  endpointsData.forEach((_, idx) => updateCurl(idx));
+  endpointsDataGlobal.forEach((_, idx) => updateCurl(idx));
 }
 
-// Toggle Card
 function toggleCard(idx) {
   const body = document.getElementById(`card-body-${idx}`);
   const icon = document.getElementById(`card-icon-${idx}`);
@@ -399,179 +475,164 @@ function toggleCard(idx) {
   }
 }
 
-// Switch Method
 function switchMethod(idx, method) {
-  const getContent = document.getElementById(`method-get-${idx}`);
-  const postContent = document.getElementById(`method-post-${idx}`);
-  const tabs = document.querySelectorAll(`#card-body-${idx} .tab-btn`);
-  
-  tabs.forEach(tab => {
-    if (tab.textContent === method) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
-  });
-  
-  if (method === 'GET') {
-    getContent.classList.add('active');
-    postContent.classList.remove('active');
-  } else {
-    getContent.classList.add('active');
-    postContent.classList.remove('active');
-  }
   updateCurl(idx);
 }
 
-// Build Curl Command
 function buildCurl(idx) {
-  const ep = endpointsData[idx];
-  const method = document.querySelector(`#card-body-${idx} .tab-btn.active`)?.textContent || 'GET';
+  const ep = endpointsDataGlobal[idx];
+  const method = ep.method;
   let url = window.location.origin + ep.path;
   const params = [];
   
   if (method === 'GET') {
-    const inputs = document.querySelectorAll(`#method-get-${idx} input`);
+    const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
     inputs.forEach(input => {
       if (input.value) params.push(`${encodeURIComponent(input.name)}=${encodeURIComponent(input.value)}`);
     });
     if (params.length) url += '?' + params.join('&');
     return `curl -X GET "${url}"`;
   } else {
-    const inputs = document.querySelectorAll(`#method-post-${idx} input`);
+    const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
     const bodyObj = {};
     inputs.forEach(input => { if (input.value) bodyObj[input.name] = input.value; });
-    const bodyTextarea = document.querySelector(`#method-post-${idx} textarea[name="body"]`);
-    let bodyStr = '';
-    if (bodyTextarea && bodyTextarea.value.trim()) {
-      try { bodyStr = JSON.stringify(JSON.parse(bodyTextarea.value)); } catch(e) { bodyStr = bodyTextarea.value; }
+    const fileInput = document.querySelector(`#card-body-${idx} input[type="file"]`);
+    
+    if (fileInput && fileInput.files && fileInput.files[0]) {
+      return `curl -X POST "${url}" \\\n  -F "file=@${fileInput.files[0].name}"`;
     } else if (Object.keys(bodyObj).length) {
-      bodyStr = JSON.stringify(bodyObj);
+      return `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(bodyObj)}'`;
+    } else {
+      return `curl -X POST "${url}"`;
     }
-    return `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${bodyStr}'`;
   }
 }
 
-// Update Curl Display
 function updateCurl(idx) {
-  const curlPre = document.getElementById(`curl-pre-${idx}`);
-  if (curlPre) curlPre.textContent = buildCurl(idx);
+  const el = document.getElementById(`curl-pre-${idx}`);
+  if (el) el.textContent = buildCurl(idx);
 }
 
-// Copy Curl
 function copyCurl(idx) {
-  const curlPre = document.getElementById(`curl-pre-${idx}`);
-  if (curlPre) {
-    navigator.clipboard.writeText(curlPre.textContent);
-    const btn = curlPre.parentElement.querySelector('.code-copy');
-    const original = btn.textContent;
+  const el = document.getElementById(`curl-pre-${idx}`);
+  if (el) {
+    navigator.clipboard.writeText(el.textContent);
+    const btn = el.parentElement.querySelector('.code-copy');
+    const orig = btn.textContent;
     btn.textContent = '✓';
-    setTimeout(() => btn.textContent = original, 1500);
+    setTimeout(() => btn.textContent = orig, 1500);
   }
 }
 
-// Copy Response
 function copyResponse(idx) {
-  const content = document.getElementById(`resp-content-${idx}`);
-  if (content && currentResponse) {
+  if (currentResponse) {
     navigator.clipboard.writeText(JSON.stringify(currentResponse, null, 2));
     const btn = document.querySelector(`#response-${idx} .response-copy`);
-    const original = btn.textContent;
+    const orig = btn.textContent;
     btn.textContent = '✓';
-    setTimeout(() => btn.textContent = original, 1500);
+    setTimeout(() => btn.textContent = orig, 1500);
   }
 }
 
-// Clear Response
 function clearResponse(idx) {
-  const respSection = document.getElementById(`response-${idx}`);
-  if (respSection) respSection.style.display = 'none';
+  const sec = document.getElementById(`response-${idx}`);
+  if (sec) sec.style.display = 'none';
   currentResponse = null;
 }
 
-// Execute Request
 async function executeRequest(idx) {
-  const ep = endpointsData[idx];
-  const method = document.querySelector(`#card-body-${idx} .tab-btn.active`)?.textContent || 'GET';
+  const ep = endpointsDataGlobal[idx];
+  const method = ep.method;
   let url = window.location.origin + ep.path;
-  const startTime = Date.now();
+  const start = Date.now();
   
-  const respSection = document.getElementById(`response-${idx}`);
-  const respContent = document.getElementById(`resp-content-${idx}`);
-  const respStatus = document.getElementById(`resp-status-${idx}`);
-  const respTime = document.getElementById(`resp-time-${idx}`);
+  const sec = document.getElementById(`response-${idx}`);
+  const cont = document.getElementById(`resp-content-${idx}`);
+  const stat = document.getElementById(`resp-status-${idx}`);
+  const tim = document.getElementById(`resp-time-${idx}`);
   
-  respContent.innerHTML = '<pre>Loading...</pre>';
-  respSection.style.display = 'block';
+  cont.innerHTML = '<pre>Loading...</pre>';
+  sec.style.display = 'block';
   
   try {
     let response;
     if (method === 'GET') {
       const params = [];
-      const inputs = document.querySelectorAll(`#method-get-${idx} input`);
-      inputs.forEach(input => { if (input.value) params.push(`${encodeURIComponent(input.name)}=${encodeURIComponent(input.value)}`); });
+      const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
+      inputs.forEach(input => {
+        if (input.value) params.push(`${encodeURIComponent(input.name)}=${encodeURIComponent(input.value)}`);
+      });
       if (params.length) url += '?' + params.join('&');
       response = await fetch(url);
     } else {
-      const inputs = document.querySelectorAll(`#method-post-${idx} input`);
-      const bodyObj = {};
-      inputs.forEach(input => { if (input.value) bodyObj[input.name] = input.value; });
-      const bodyTextarea = document.querySelector(`#method-post-${idx} textarea[name="body"]`);
-      let body = null;
-      if (bodyTextarea && bodyTextarea.value.trim()) {
-        try { body = JSON.parse(bodyTextarea.value); } catch(e) { body = bodyTextarea.value; }
-      } else if (Object.keys(bodyObj).length) {
-        body = bodyObj;
+      const fileInput = document.querySelector(`#card-body-${idx} input[type="file"]`);
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const formData = new FormData();
+        formData.append('image', fileInput.files[0]);
+        response = await fetch(url, { method: 'POST', body: formData });
+      } else {
+        const inputs = document.querySelectorAll(`#card-body-${idx} input[type="text"]`);
+        const bodyObj = {};
+        inputs.forEach(input => { if (input.value) bodyObj[input.name] = input.value; });
+        response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: Object.keys(bodyObj).length ? JSON.stringify(bodyObj) : undefined
+        });
       }
-      response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: body ? JSON.stringify(body) : undefined
-      });
     }
     
-    const ms = Date.now() - startTime;
+    const ms = Date.now() - start;
     const isOk = response.ok;
     let data;
-    const contentType = response.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
+    const ct = response.headers.get('content-type');
+    if (ct && ct.includes('application/json')) {
       data = await response.json();
     } else {
       data = await response.text();
     }
     
     currentResponse = data;
-    respStatus.textContent = `${response.status} ${response.statusText}`;
-    respStatus.className = `response-status ${isOk ? 'ok' : 'err'}`;
-    respTime.textContent = `${ms}ms`;
+    stat.textContent = `${response.status} ${response.statusText}`;
+    stat.className = `response-status ${isOk ? 'ok' : 'err'}`;
+    tim.textContent = `${ms}ms`;
     
     const jsonStr = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
-    respContent.innerHTML = `<pre>${esc(jsonStr)}</pre>`;
-    
+    cont.innerHTML = `<pre>${esc(jsonStr)}</pre>`;
     updateCurl(idx);
   } catch (error) {
-    respStatus.textContent = '500 Error';
-    respStatus.className = 'response-status err';
-    respTime.textContent = `${Date.now() - startTime}ms`;
-    respContent.innerHTML = `<pre>Error: ${esc(error.message)}</pre>`;
+    stat.textContent = '500 Error';
+    stat.className = 'response-status err';
+    tim.textContent = `${Date.now() - start}ms`;
+    cont.innerHTML = `<pre>Error: ${esc(error.message)}</pre>`;
   }
 }
 
-// Search Filter
 function setupSearch() {
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => renderEndpoints(e.target.value));
+  document.getElementById('searchInput')?.addEventListener('input', (e) => renderEndpoints(e.target.value));
+}
+
+async function loadEndpoints() {
+  try {
+    const response = await fetch('/endpoint');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    endpointsDataGlobal = convertEndpointData(data);
+    renderEndpoints('');
+  } catch (error) {
+    console.error('Gagal load /endpoint:', error);
+    const container = document.getElementById('ep-list');
+    if (container) {
+      container.innerHTML = `<div class="card" style="padding:40px;text-align:center;color:var(--red);border-color:var(--red)"><div>❌ Gagal memuat endpoint</div><div style="font-size:11px;margin-top:12px;">${esc(error.message)}</div><div style="font-size:10px;margin-top:8px;color:var(--fg3)">Pastikan server menyediakan /endpoint</div></div>`;
+    }
   }
 }
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  renderEndpoints('');
+  loadEndpoints();
   setupSearch();
   document.getElementById('yr').textContent = new Date().getFullYear();
   
-  // Sidebar toggle
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
   const toggleBtn = document.getElementById('sidebarToggle');
@@ -589,14 +650,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Loader
   setTimeout(() => {
     const loader = document.getElementById('loader');
     if (loader) loader.classList.add('out');
   }, 500);
 });
 
-// Expose globals
 window.toggleCard = toggleCard;
 window.switchMethod = switchMethod;
 window.executeRequest = executeRequest;
