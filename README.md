@@ -1,8 +1,8 @@
 # Simple Base!!
 
-![Base-Api Screenshot](https://i.ibb.co.com/s9XGRmpd/IMG-20260412-WA0004.jpg)
+![Base-Api Screenshot](./example_web.jpg)
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/rynxzyy/Simplified-Api)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/izuku-mii/Base-Api)
 
 ## Features
 
